@@ -27,56 +27,56 @@ export function Table(){
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Ocupação</div>
-                <div className="text-gray-600">81.48%</div>
+                <div className=" text-gray-800">Ocupação</div>
+                <div className="text-black">81.48%</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Total de Reservas</div>
-                <div className="text-gray-600">15</div>
+                <div className="text-black-800">Total de Reservas</div>
+                <div className="text-black">15</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Estadia Média</div>
-                <div className="text-gray-600">1.47</div>
+                <div className=" text-gray-800">Estadia Média</div>
+                <div className="text-black">1.47</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Diária Média</div>
-                <div className="text-gray-600">R$ 285,86</div>
+                <div className=" text-gray-800">Diária Média</div>
+                <div className="text-black">R$ 285,86</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Reservas Canceladas</div>
-                <div className="text-gray-600">2</div>
+                <div className=" text-gray-800">Reservas Canceladas</div>
+                <div className="text-black">2</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Valor Total em Diárias</div>
-                <div className="text-gray-600">R$ --</div>
+                <div className=" text-gray-800">Valor Total em Diárias</div>
+                <div className="text-black">R$ --</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="font-bold text-gray-800">Valor Total em Taxas</div>
-                <div className="text-gray-600">R$ 627,00</div>
+                <div className=" text-gray-800">Valor Total em Taxas</div>
+                <div className="text-black">R$ 627,00</div>
                 </div>
             </td>
             </tr>
@@ -95,10 +95,10 @@ export function Table(){
     <table className="w-full flex flex-col table-auto p-10 ">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
-          <th className="w-full text-left font-bold text-gray-700 border-y border-gray-200 px-4 py-2">Canal</th>
-          <th className="w-full text-left font-bold text-gray-700 border-y border-gray-200  px-4 py-2">Qtd</th>
-          <th className="w-full text-left font-bold text-gray-700 border-y border-gray-200  px-4 py-2">Qtd Canc.</th>
-          <th className="w-full text-left font-bold text-gray-700 border-y border-gray-200  px-4 py-2">Valor de Vendas.</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Canal</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Qtd</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Qtd Canc.</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor de Vendas.</th>
 
         </tr>
       </thead>
