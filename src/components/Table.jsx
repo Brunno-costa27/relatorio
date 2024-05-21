@@ -2,14 +2,17 @@ import data from "../database/data-set"
 
 export function Table(){
 
-    const dados = [
+    const itensFiltrados = data[0].bookings.bookings;
+    console.log(itensFiltrados)
+
+    const reservas_canal = [
 
         { categoria: 'Airbnb', valor: '3', subvalor: 'R$ 1.127,52' },
         { categoria: 'Booking.com', valor: '10', subvalor: 'R$ 4.033,78' },
     
       ];
 
-    console.log(data);
+
     
 
     return(
@@ -103,7 +106,7 @@ export function Table(){
         </tr>
       </thead>
       <tbody className="">
-        {dados.map((item) => (
+        {reservas_canal.map((item) => (
           <tr className="w-full flex text-center" key={item.categoria}>
             <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
             <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
@@ -113,6 +116,33 @@ export function Table(){
         ))}
       </tbody>
     </table>
+
+    {/* Reservas por comissões */}
+
+    {/* <h1 className="text-left font-bold text-black py-0 p-10 text-4xl">Reservas por comissões</h1>
+
+    <table className="w-full flex flex-col table-auto p-10 ">
+      <thead>
+        <tr>
+          {reservas_e_comissoes[0].map((item) => (
+            <th key={item} className="text-left font-bold text-gray-700 border border-gray-200 bg-gray-100 px-4 py-2">
+              {item}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {reservas_e_comissoes.slice(1).map((row) => (
+          <tr key={row[0]}>
+            {row.map((item) => (
+              <td key={item} className="text-left border border-gray-200 px-4 py-2">
+                {item}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table> */}
 
         </>
 
