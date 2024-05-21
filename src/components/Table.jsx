@@ -207,7 +207,7 @@ export function Table(){
     {/* ______________________________________________________________________________________ */}
 
 
-    <table className="w-full flex flex-col table-auto p-10 ">
+    <table className="w-full flex flex-col table-auto px-10">
         <thead  className="flex text-center">
           <tr className="w-full flex justify-center items-center">
             <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Número</th>
@@ -369,6 +369,185 @@ export function Table(){
                   </tbody>
                 </table>
       </tbody>
+    </table>
+
+
+
+    {/* Taxas */}
+
+    <h1 className="text-left font-bold text-black py-0 p-10 text-4xl">Taxas</h1>
+
+    <table className="w-full flex flex-col justify-between  table-auto px-10">
+            <thead className="">
+                <tr className="flex justify-between px-4">
+                <th className="flex text-left  text-black py-4 ">Taxas</th>
+                <th className="flex text-left  text-black py-4 ">Valor Total</th>
+                </tr>
+            </thead>
+        <tbody>
+            {data.map((item) => (
+                <>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Taxas de Limpeza</div>
+                <div className="text-black font-bold">R$ 207,00</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className="text-black-800">Taxas de roupa de cama</div>
+                <div className="text-black font-bold">R$ 207,00</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Taxa de serviço</div>
+                <div className="text-black font-bold">R$ 207,00</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Taxas de roupa de Utility</div>
+                <div className="text-black font-bold">R$ 285,86</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Taxas Outras</div>
+                <div className="text-black font-bold">2</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Valor Total em Diárias</div>
+                <div className="text-black font-bold">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Valor Total em Taxas</div>
+                <div className="text-black font-bold">R$ 627,00</div>
+                </div>
+            </td>
+            </tr>
+
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-black font-bold">Total</div>
+                <div className="text-black font-bold">R$ 627,00</div>
+                </div>
+            </td>
+            </tr>
+            </>
+            ))}
+        </tbody>
+    </table>
+
+
+    {/* Despesas e ajustes */}
+
+    <h1 className="text-left font-bold text-black p-10 text-4xl">Despesas e ajustes</h1>
+
+    <table className="w-full flex flex-col table-auto px-10">
+      <thead  className="flex text-center">
+        <tr className="w-full flex justify-center items-center">
+          <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Despesas</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Vencimento</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor Adm</th>
+          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor Prop.</th>
+
+        </tr>
+      </thead>
+      <tbody className="">
+        {reservas_canal.map((item) => (
+          <tr className="w-full flex text-center" key={item.categoria}>
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">Total</td>
+            <td className="w-full  text-left border-y border-gray-200 px-4 py-4 font-bold"></td>
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">{item.subvalor}</td>
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">{item.subvalor}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+
+    {/* Totais */}
+
+    <table className="w-full flex flex-col table-auto p-10">
+            <thead>
+                <tr>
+                <th className="text-left font-bold text-black py-4 text-4xl">Totais</th>
+                </tr>
+            </thead>
+        <tbody>
+            {data.map((item) => (
+                <>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Total de Administrador em comissões</div>
+                <div className="text-black">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className="text-black-800">Deduções Administrador</div>
+                <div className="text-black">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Total Proprietário em Repasses</div>
+                <div className="text-black">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Deduções Proprietário</div>
+                <div className="text-black">R$ 285,86</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800 font-bold">Subtotal Proprietário</div>
+                <div className="text-black">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            <tr className="flex">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-2">
+                <div className="flex justify-between">
+                <div className=" text-gray-800">Subtotal Administrador</div>
+                <div className="text-black">R$ --</div>
+                </div>
+            </td>
+            </tr>
+            
+            </>
+            ))}
+        </tbody>
     </table>
 
         </>
