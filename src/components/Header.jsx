@@ -24,10 +24,10 @@ export function Header(){
         <>
             
                     
-                        <header  className="w-full flex flex-col p-10 gap-3">
+                        {/* <header  className="w-full flex flex-col p-10 gap-3">
                             
                             <div className="w-[70%] flex justify-between">
-                                <p className="w-32 text-center text-sm">{formatDate}</p>
+                                <p className="w-32 text-center text-sm ">{formatDate}</p>
                                 <p className="">Ayrton | finanças</p>
                             </div>
 
@@ -46,7 +46,26 @@ export function Header(){
                                 </>
                                 ))}
                             </div>
-                        </header>
+                        </header> */}
+
+<header class="w-full flex flex-col p-10 gap-3">
+  <div class="flex justify-between">
+    <p class="text-center text-sm w-full sm:w-32">  {formatDate}
+    </p>
+    <p class="">Ayrton | finanças</p>
+  </div>
+
+  <div class="flex flex-wrap justify-between">  <div class="flex flex-col gap-3 mb-4 sm:mb-0">  <img class="w-32 rounded-full" src={logo} alt="" />
+    </div>
+    {header.map((item) => (
+      <div class="flex flex-col justify-center gap-2 font-bold basis-full sm:basis-1/2">  <p>Renti Aqui</p>
+        <p>Imóvel: {item.name}</p>
+        <p>Período:30/03/2024 a 30/03/2024</p>
+        <p>Método: {method.calcMode}</p>
+      </div>
+    ))}
+  </div>
+</header>
 
     </>
     )
