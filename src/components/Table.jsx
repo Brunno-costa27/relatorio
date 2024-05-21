@@ -1,14 +1,25 @@
 import data from "../database/data-set"
-
+import formatNumber from "../functions/functions.js"
 export function Table(){
 
-    const resumo = data[0].bookings.summary;
+    const resumo = [
+      data[0].bookings.summary
+    ]
+
+    const canal_de_reservas = [
+      data[0].bookings.summary.channel
+    ]
+
+    const canal_de_comissoes = data[0].bookings.bookings;
+    console.log(canal_de_comissoes)
 
     const reservas_canal = [
 
         { categoria: 'Airbnb', valor: '3', subvalor: 'R$ 1.127,52' },
     
       ];
+
+    
     
 
     return(
@@ -21,7 +32,7 @@ export function Table(){
                 </tr>
             </thead>
         <tbody>
-            {data.map((item) => (
+            {resumo.map((item) => (
                 <>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
@@ -35,7 +46,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className="text-black-800">Total de Reservas</div>
-                <div className="text-black">15</div>
+                <div className="text-black">{item.bookingCount}</div>
                 </div>
             </td>
             </tr>
@@ -43,7 +54,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Estadia Média</div>
-                <div className="text-black">1.47</div>
+                <div className="text-black">{item.avgLengthOfStayPerBooking.toFixed(2)}</div>
                 </div>
             </td>
             </tr>
@@ -51,7 +62,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Diária Média</div>
-                <div className="text-black">R$ 285,86</div>
+                <div className="text-black">R$ {formatNumber(item.avgBookingValuePerDay)}</div>
                 </div>
             </td>
             </tr>
@@ -59,7 +70,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Reservas Canceladas</div>
-                <div className="text-black">2</div>
+                <div className="text-black">{item.cancelattionSummary.count}</div>
                 </div>
             </td>
             </tr>
@@ -75,7 +86,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Valor Total em Taxas</div>
-                <div className="text-black">R$ 627,00</div>
+                <div className="text-black">R$ {formatNumber(item.taxTotal)}</div>
                 </div>
             </td>
             </tr>
@@ -102,13 +113,23 @@ export function Table(){
         </tr>
       </thead>
       <tbody className="">
-        {reservas_canal.map((item) => (
-          <tr className="w-full flex text-center" key={item.categoria}>
-            <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
-            <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
-            <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-            <td className="w-full text-right border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+        {canal_de_reservas.map((item) => (
+          <>
+          <tr className="w-full flex text-center">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4">BookingCom</td>
+            <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.BookingCom.count}</td>
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.BookingCom.cancelledCount}</td>
+            <td className="w-full text-right border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.BookingCom.bookingValue)}</td>
+        </tr>
+
+          <tr className="w-full flex text-center">
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4">Airbnb</td>
+            <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.Airbnb.count}</td>
+            <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.Airbnb.cancelledCount}</td>
+            <td className="w-full text-right border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.Airbnb.bookingValue)}</td>
           </tr>
+          
+          </>
         ))}
       </tbody>
     </table>
@@ -123,33 +144,36 @@ export function Table(){
             <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Número</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Nome</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Canal</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">In</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Out</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Status</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Item</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor</th>
-            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Cal.</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Calc.</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Comissão</th>
             <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Proprietário</th>
 
 
           </tr>
         </thead>
+                {canal_de_comissoes.map((item) => (
       <tbody className="">
-                {reservas_canal.map((item) => (
-                  <tr className="w-full flex text-center" key={item.categoria}>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
-                    <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                  <tr className="w-full flex text-center" key={item.id}>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">#{item.id}</td>
+                    <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.primaryGuest.name}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.origin}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.checkIn}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.checkOut}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.status}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.bill[0].services[0].name}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4 ">R$ {formatNumber(item.bill[0].services[0].value)}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">20%</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.bill[0].services[0].value * 0.2)}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.bill[0].services[0].value * 0.8)}</td>
+
 
                   </tr>
-                ))}
+               
 
                 <table className="flex flex-col justify-end items-end">
                  
@@ -163,7 +187,7 @@ export function Table(){
                       </tr>
 
                       <tr className=" flex text-center" >
-                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Serv.</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
@@ -171,7 +195,7 @@ export function Table(){
                       </tr>
 
                       <tr className=" flex text-center" >
-                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Util.</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
@@ -179,7 +203,7 @@ export function Table(){
                       </tr>
 
                       <tr className=" flex text-center" >
-                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Outras</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
                         <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
@@ -195,6 +219,7 @@ export function Table(){
                   </tbody>
                 </table>
       </tbody>
+       ))}
     </table>
 
     {/* ______________________________________________________________________________________ */}

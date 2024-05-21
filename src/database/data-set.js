@@ -569,7 +569,7 @@ const data = [
                                     "calcBase": "gross",
                                     "capacity": 0,
                                     "per_person": [],
-                                    "comissionMode": "percent",
+                                    "comissionMode": "  ",
                                     "specificDates": {},
                                     "comissionValue": 20,
                                     "weekDaysValues": [],

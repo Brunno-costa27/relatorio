@@ -17,7 +17,6 @@ export function Header(){
     const formatDate = moment(dateString).format("DD/MM/YYYY, h:mm");
 
 
-    console.log(method);
 
     
 
