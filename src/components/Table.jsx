@@ -2,20 +2,13 @@ import data from "../database/data-set"
 
 export function Table(){
 
-    const itensFiltrados = data[0].bookings.bookings;
-    console.log(itensFiltrados)
+    const resumo = data[0].bookings.summary;
 
     const reservas_canal = [
 
         { categoria: 'Airbnb', valor: '3', subvalor: 'R$ 1.127,52' },
     
       ];
-
-
-      
-      const screenWidth = window.innerWidth;
-      const screenWidthDividedByTen = screenWidth / 10;
-      console.log(screenWidthDividedByTen);
     
 
     return(
