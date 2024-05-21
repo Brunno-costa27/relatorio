@@ -8,11 +8,14 @@ export function Table(){
     const reservas_canal = [
 
         { categoria: 'Airbnb', valor: '3', subvalor: 'R$ 1.127,52' },
-        { categoria: 'Booking.com', valor: '10', subvalor: 'R$ 4.033,78' },
     
       ];
 
 
+      
+      const screenWidth = window.innerWidth;
+      const screenWidthDividedByTen = screenWidth / 10;
+      console.log(screenWidthDividedByTen);
     
 
     return(
@@ -119,30 +122,254 @@ export function Table(){
 
     {/* Reservas por comissões */}
 
-    {/* <h1 className="text-left font-bold text-black py-0 p-10 text-4xl">Reservas por comissões</h1>
+    <h1 className="text-left font-bold text-black py-0 p-10 text-4xl">Reservas por comissões</h1>
 
     <table className="w-full flex flex-col table-auto p-10 ">
-      <thead>
-        <tr>
-          {reservas_e_comissoes[0].map((item) => (
-            <th key={item} className="text-left font-bold text-gray-700 border border-gray-200 bg-gray-100 px-4 py-2">
-              {item}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {reservas_e_comissoes.slice(1).map((row) => (
-          <tr key={row[0]}>
-            {row.map((item) => (
-              <td key={item} className="text-left border border-gray-200 px-4 py-2">
-                {item}
-              </td>
-            ))}
+        <thead  className="flex text-center">
+          <tr className="w-full flex justify-center items-center">
+            <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Número</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Nome</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Canal</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Out</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Status</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Item</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Cal.</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Comissão</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Proprietário</th>
+
+
           </tr>
-        ))}
+        </thead>
+      <tbody className="">
+                {reservas_canal.map((item) => (
+                  <tr className="w-full flex text-center" key={item.categoria}>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
+                    <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+
+                  </tr>
+                ))}
+
+                <table className="flex flex-col justify-end items-end">
+                 
+                  <tbody className="w-2/4">
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">100%</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className="w-full flex text-center" >
+                        <td className="w-[127px] text-left font-bold border-y border-gray-200 px-4 py-4">Total</td>
+                        <td className="w-[253px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 650,00</td>
+                        <td className="w-[128px] text-left font-bold border-y border-gray-200 px-4 py-4">R$ 130,00</td>
+                        <td className="w-[128px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 520,00</td>
+                      </tr>
+                  </tbody>
+                </table>
       </tbody>
-    </table> */}
+    </table>
+
+    {/* ______________________________________________________________________________________ */}
+
+
+    <table className="w-full flex flex-col table-auto p-10 ">
+        <thead  className="flex text-center">
+          <tr className="w-full flex justify-center items-center">
+            <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Número</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Nome</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Canal</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Out</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Status</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Item</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Cal.</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Comissão</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Proprietário</th>
+
+
+          </tr>
+        </thead>
+      <tbody className="">
+                {reservas_canal.map((item) => (
+                  <tr className="w-full flex text-center" key={item.categoria}>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
+                    <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+
+                  </tr>
+                ))}
+                
+                <table className="flex flex-col justify-end items-end">
+                 
+                  <tbody className="w-2/4">
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">100%</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className="w-full flex text-center" >
+                        <td className="w-[127px] text-left font-bold border-y border-gray-200 px-4 py-4">Total</td>
+                        <td className="w-[253px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 650,00</td>
+                        <td className="w-[128px] text-left font-bold border-y border-gray-200 px-4 py-4">R$ 130,00</td>
+                        <td className="w-[128px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 520,00</td>
+                      </tr>
+                  </tbody>
+                </table>
+      </tbody>
+    </table>
+
+
+    {/* _______________________________________________________________________________ */}
+
+
+    <table className="w-full flex flex-col table-auto p-10 ">
+        <thead  className="flex text-center">
+          <tr className="w-full flex justify-center items-center">
+            <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Número</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Nome</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Canal</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Out</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Status</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Item</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Cal.</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Comissão</th>
+            <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Proprietário</th>
+
+
+          </tr>
+        </thead>
+      <tbody className="">
+                {reservas_canal.map((item) => (
+                  <tr className="w-full flex text-center" key={item.categoria}>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
+                    <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+                    <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+
+                  </tr>
+                ))}
+                
+                <table className="flex flex-col justify-end items-end">
+                 
+                  <tbody className="w-2/4">
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">100%</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className=" flex text-center" >
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4"></td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                        <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
+                      </tr>
+
+                      <tr className="w-full flex text-center" >
+                        <td className="w-[127px] text-left font-bold border-y border-gray-200 px-4 py-4">Total</td>
+                        <td className="w-[253px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 650,00</td>
+                        <td className="w-[128px] text-left font-bold border-y border-gray-200 px-4 py-4">R$ 130,00</td>
+                        <td className="w-[128px]  text-left font-bold border-y border-gray-200 px-4 py-4">R$ 520,00</td>
+                      </tr>
+                  </tbody>
+                </table>
+      </tbody>
+    </table>
 
         </>
 
