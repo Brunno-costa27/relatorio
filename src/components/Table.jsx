@@ -104,7 +104,7 @@ export function Table(){
           <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Canal</th>
           <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Qtd</th>
           <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Qtd Canc.</th>
-          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor de Vendas.</th>
+          <th className="w-full text-right font-bold text-black border-y border-gray-200  px-4 py-2">Valor de Vendas.</th>
 
         </tr>
       </thead>
@@ -114,7 +114,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.categoria}</td>
             <td className="w-full  text-left border-y border-gray-200 px-4 py-4">{item.valor}</td>
             <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
-            <td className="w-full text-left border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
+            <td className="w-full text-right border-y border-gray-200 px-4 py-4">{item.subvalor}</td>
           </tr>
         ))}
       </tbody>
@@ -468,7 +468,7 @@ export function Table(){
           <th className="w-full text-left font-bold text-black border-y border-gray-200 px-4 py-2">Despesas</th>
           <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Vencimento</th>
           <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor Adm</th>
-          <th className="w-full text-left font-bold text-black border-y border-gray-200  px-4 py-2">Valor Prop.</th>
+          <th className="w-full text-right font-bold text-black border-y border-gray-200  px-4 py-2">Valor Prop.</th>
 
         </tr>
       </thead>
@@ -478,7 +478,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">Total</td>
             <td className="w-full  text-left border-y border-gray-200 px-4 py-4 font-bold"></td>
             <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">{item.subvalor}</td>
-            <td className="w-full text-left border-y border-gray-200 px-4 py-4 font-bold">{item.subvalor}</td>
+            <td className="w-full text-right border-y border-gray-200 px-4 py-4 font-bold">{item.subvalor}</td>
           </tr>
         ))}
       </tbody>
