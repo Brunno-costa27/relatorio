@@ -108,13 +108,13 @@ export function Table(){
 
     <h1 className="text-lg sm:text-left font-bold text-black py-0 p-10 sm:text-4xl">Reservas por canal</h1>
 
-    <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-10 ">
-      <thead  className="flex text-center">
-        <tr className="w-full flex justify-center items-center">
+    <table className="overflow-auto sm:w-full flex table-auto flex-col p-10 ">
+      <thead  className="w-auto overflow-auto sm:flex text-center">
+        <tr className="overflow-auto sm:w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Canal</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd Canc.</th>
-          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor de Vendas.</th>
+          <th className="flex sm:w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor de Vendas.</th>
 
         </tr>
       </thead>
@@ -142,11 +142,11 @@ export function Table(){
 
     {/* Reservas por comissões */}
 
-    <h1 className="text-lg sm:text-left font-bold text-black py-0 p-10 sm:text-4xl">Reservas por comissões</h1>
+    <h1 className="text-lg sm:text-left font-bold text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
 
-    <table className="w-full flex flex-col table-auto p-10 ">
-        <thead  className="flex text-center">
-          <tr className="w-full flex justify-center items-center">
+    <table className="overflow-auto sm:w-full flex flex-col table-auto px-10">
+        <thead  className="overflow-auto sm:flex text-center">
+          <tr className="overflow-auto sm:w-full flex justify-center items-center">
             <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Número</th>
             <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Nome</th>
             <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Canal</th>
@@ -169,13 +169,13 @@ export function Table(){
                  
                     
                   <tbody className="text-sm sm:text-base">
-                      <tr className="w-full flex text-center" key={item.id}>
-                        <td className="w-[124px] text-left border-y border-black px-4 py-4">#{item.id}</td>
-                        <td className="w-[124px] text-left border-y border-black px-4 py-4">{item.primaryGuest.name}</td>
-                        <td className="w-[116px] text-left border-y border-black px-4 py-4">{item.origin}</td>
-                        <td className="w-[118px] text-left border-y border-black px-4 py-4">{moment(item.checkIn).format("DD/MM/YYYY")}</td>
-                        <td className="w-[112px] text-left border-y border-black px-4 py-4">{moment(item.checkOut).format("DD/MM/YYYY")}</td>
-                        <td className="w-[124px] text-left border-y border-black px-4 py-4">
+                      <tr className="overflow-auto sm:w-full flex text-center" key={item.id}>
+                        <td className="w-full text-left border-y border-black px-4 py-4">#{item.id}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">{item.primaryGuest.name}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">{item.origin}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">{moment(item.checkIn).format("DD/MM/YYYY")}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">{moment(item.checkOut).format("DD/MM/YYYY")}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">
                           {
                             item.status === 'inConfirmation'
                             ? 'Em Confirmação.'
@@ -186,19 +186,32 @@ export function Table(){
                             : item.status
                             }
                         </td>
-                        <td className="w-[124px] text-left border-y border-black px-4 py-4">{item.bill[0].services[0].name}</td>
-                        <td className="w-[124px] text-left border-y border-black px-4 py-4 ">R$ {formatNumber(item.values.comissions.rateValue)}</td>
-                        <td className="w-[126px] text-left border-y border-black px-4 py-4 font-bold">20%</td>
-                        <td className="w-[126px] text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.comissions.RATES)}</td>
-                        <td className="w-[134px] text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.ownerValue)}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">{item.bill[0].services[0].name}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4 ">R$ {formatNumber(item.values.comissions.rateValue)}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4 font-bold">20%</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.comissions.RATES)}</td>
+                        <td className="w-full text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.ownerValue)}</td>
                       </tr>
                           
 
-                      <table className="flex flex-col justify-end items-end">
+                      <table className="overflow-auto sm:flex flex-col justify-end items-end">
                       
-                        <tbody className="text-sm sm:text-base sm:w-[46%]">
+                        <tbody className="overflow-auto sm:w-full text-sm sm:text-base">
+
                              
-                              <tr className="flex text-center">
+
+                            
+
+                            <tr className="overflow-auto sm:w-full flex text-center">
+
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                              
+
                               <td className="w-full text-left border-0 border-black px-4 py-4">Limp.</td>
                                   
                                 <td className="w-full text-left border-0 border-black px-4 py-4">R$ </td>
@@ -208,7 +221,15 @@ export function Table(){
                               <td className="w-full text-left border-0 border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className="flex text-center" >
+                            <tr className="overflow-auto sm:flex text-center" >
+
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+
                               <td className="w-full text-left border-y border-black px-4 py-4">Serv.</td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-black px-4 py-4"></td>
@@ -216,7 +237,15 @@ export function Table(){
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className=" flex text-center" >
+                            <tr className="overflow-auto sm:flex text-center" >
+
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+                            <td className="w-full border-none text-left px-4 py-4"></td>
+
                               <td className="w-full text-left border-y border-black px-4 py-4">Util.</td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-black px-4 py-4"></td>
@@ -224,15 +253,33 @@ export function Table(){
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className=" flex text-center" >
+                            <tr className="overflow-auto sm:flex text-center" >
+
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+
                               <td className="w-full text-left border-y border-black px-4 py-4">Outras</td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-black px-4 py-4"></td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
-                            <tr className=" flex text-center" >
+                            <tr className="overflow-auto sm:flex text-center" >
+
+
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+                              <td className="w-full border-none text-left px-4 py-4"></td>
+
                               <td className="w-full text-left font-bold border-0 border-black px-4 py-4">Total</td>
+                              
                               <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">R$ {formatNumber(item.values.rateValue)}</td>
                               <td className="w-full  text-left font-bold border-0 border-black px-4 py-4"></td>
 
@@ -252,13 +299,21 @@ export function Table(){
 
     {/* total */}
 
-                      <table className="flex flex-col px-10">
+                      <table className="overflow-auto sm:flex flex-col px-10">
                             <tbody className="text-sm sm:text-base">
-                            <tr className="w-full flex text-center" >
-                              <td className="w-3/4 text-left font-bold border-b-0 border-y border-black px-4 py-4">Total</td>
-                              <td className="w-[120px]  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ </td>
-                              <td className="w-[120px]  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.totalComission)}</td>
-                              <td className="w-[120px] text-left font-bold border-b-0 border-y  border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.ownerValue)}</td>
+                            <tr className="overflow-auto sm:w-full flex text-center" >
+                              <td className="w-full text-left font-bold border-b-0 border-y border-black px-4 py-4">Total</td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+
+                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ </td>
+                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.totalComission)}</td>
+                              <td className="w-full text-left font-bold border-b-0 border-y  border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.ownerValue)}</td>
                             </tr>
                             </tbody>
                       </table>
