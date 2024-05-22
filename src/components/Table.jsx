@@ -14,8 +14,8 @@ export function Table(){
 
     const canal_de_comissoes = data[0].bookings.bookings;
 
-    const viewportWidth = window.innerWidth;
-    console.log(viewportWidth)
+    // const viewportWidth = window.innerWidth;
+    // console.log(viewportWidth)
 
     const reservas_canal = [
 
@@ -23,6 +23,7 @@ export function Table(){
     
       ];
 
+      
     
     
 
@@ -160,7 +161,12 @@ export function Table(){
 
           </tr>
         </thead>
-                {canal_de_comissoes.map((item) => (
+                {
+                  
+                  canal_de_comissoes.map((item) => (
+
+                 
+                    
                   <tbody className="">
                       <tr className="w-full flex text-center" key={item.id}>
                         <td className="w-[124px] text-left border-y border-gray-200 px-4 py-4">#{item.id}</td>
@@ -190,9 +196,12 @@ export function Table(){
                       <table className="flex flex-col justify-end items-end">
                       
                         <tbody className="w-[46%]">
-                            <tr className="flex text-center">
+                             
+                              <tr className="flex text-center">
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">Limp.</td>
-                              <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.bill[0].services[0].value)}</td>
+                                  
+                                <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ </td>
+                              
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">100%</td>
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
@@ -221,7 +230,6 @@ export function Table(){
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-gray-200 px-4 py-4">R$ 0,00</td>
                             </tr>
-
                             <tr className=" flex text-center" >
                               <td className="w-full text-left font-bold border-y border-gray-200 px-4 py-4">Total</td>
                               <td className="w-full  text-left font-bold border-y border-gray-200 px-4 py-4">R$ {formatNumber(item.values.rateValue)}</td>
@@ -232,9 +240,27 @@ export function Table(){
                             </tr>
                         </tbody>
                       </table>
+
+                      
                   </tbody>
+             
                 ))}
+
+
     </table>
+
+    {/* total */}
+
+                      <table className="flex flex-col px-10">
+                            <tbody>
+                            <tr className="w-full flex text-center" >
+                              <td className="w-3/4 text-left font-bold border-b-0 border-y border-gray-200 px-4 py-4">Total</td>
+                              <td className="w-[120px]  text-left font-bold border-b-0 border-y border-gray-200 px-4 py-4">R$ </td>
+                              <td className="w-[120px]  text-left font-bold border-b-0 border-y border-gray-200 px-4 py-4">R$ {formatNumber(resumo[0].comissions.totalComission)}</td>
+                              <td className="w-[120px] text-left font-bold border-b-0 border-y  border-gray-200 px-4 py-4">R$ {formatNumber(resumo[0].comissions.ownerValue)}</td>
+                            </tr>
+                            </tbody>
+                      </table>
 
     {/* ______________________________________________________________________________________ */}
 
@@ -242,12 +268,12 @@ export function Table(){
 
     {/* Taxas */}
 
-    <h1 className="text-left font-bold text-black py-0 p-10 text-4xl">Taxas</h1>
+    <h1 className="text-left font-bold text-black py-5 p-10 text-4xl">Taxas</h1>
 
     <table className="w-full flex flex-col justify-between  table-auto px-10">
             <thead className="">
                 <tr className="flex justify-between px-4">
-                <th className="flex text-left  text-black py-4 ">Taxas</th>
+                <th className="flex text-left  text-black py-4 ">Taxa</th>
                 <th className="flex text-left  text-black py-4 ">Valor Total</th>
                 </tr>
             </thead>
@@ -361,13 +387,13 @@ export function Table(){
                 </tr>
             </thead>
         <tbody>
-            {data.map((item) => (
+            {resumo.map((item) => (
                 <>
             <tr className="flex">
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Total de Administrador em comissões</div>
-                <div className="text-black">R$ --</div>
+                <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>
                 </div>
             </td>
             </tr>
@@ -383,7 +409,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Total Proprietário em Repasses</div>
-                <div className="text-black">R$ --</div>
+                <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
                 </div>
             </td>
             </tr>
@@ -399,7 +425,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800 font-bold">Subtotal Proprietário</div>
-                <div className="text-black">R$ --</div>
+                <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
                 </div>
             </td>
             </tr>
@@ -407,7 +433,7 @@ export function Table(){
             <td className="w-full text-left border-y border-gray-200 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Subtotal Administrador</div>
-                <div className="text-black">R$ --</div>
+                <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>
                 </div>
             </td>
             </tr>
