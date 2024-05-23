@@ -1,6 +1,7 @@
 import data from "../database/data-set"
 import formatNumber from "../functions/functions.js"
 import moment from 'moment';
+import QuickChart from "quickchart-js"
 
 export function Table(){
 
@@ -24,9 +25,115 @@ export function Table(){
     
       ];
 
+
+const  chart = new QuickChart();
+
+chart.setWidth(500)
+chart.setHeight(300);
+chart.setVersion('2.9.4');
+
+
+canal_de_reservas[0].cancelado = canal_de_reservas[0].cancelledCount
+chart.setConfig({
+  type: 'doughnut',
+  data: {
+    labels: Object.keys(canal_de_reservas[0]),
+    datasets: [{ data: [canal_de_reservas[0].BookingCom.count, canal_de_reservas[0].Airbnb.count, resumo[0].statusCount.canceled]}],
+  },
+  options: {
+    plugins: {
+      doughnutlabel: {
+        labels: [{ text: resumo[0].bookingCount, font: { size: 20 } }, { text: 'Total' }],
+      },
+    },
+  },
+});
+
+var graficOrigens = chart.getUrl() 
+
+// // Get the graficOrigens...
+// const async graficOrigens = await chart.toBinary();
+
+// // Or write it to a file
+// chart.toFile('chart.png');
+    
+    
+const chart1 = new QuickChart();
+
+chart1.setWidth(500)
+chart1.setHeight(300);
+chart1.setVersion('2.9.4');
+
+chart1.setConfig({
+  type: 'doughnut',
+  data: {
+    datasets: [
+      {
+        data: [
+          ((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0),
+          100-((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0)
+        ],
+        backgroundColor: ['green', '#eee'],
+        label: 'Dataset 1',
+        borderWidth: 0,
+      },
+    ],
+    labels: ['A', 'C'],
+  },
+  options: {
+    circumference: Math.PI,
+    rotation: Math.PI,
+    cutoutPercentage: 75,
+    layout: {
+      padding: 60,
       
-    
-    
+    },
+    legend: {
+      display: false,
+    },
+    plugins: {
+      datalabels: {
+        color: '#404040',
+        anchor: 'end',
+        align: 'end',
+        formatter: (val) => val + '%',
+        font: {
+          size: 25,
+          weight: 'bold',
+        },
+      },
+      doughnutlabel: {
+        labels: [
+          {
+            text: '\nTaxa de',
+            font: {
+              size: 20,
+            },
+          },
+          {
+            text: '\nocupação',
+            color: '#000',
+            font: {
+              size: 25,
+              weight: 'bold',
+            },
+          },
+        ],
+      },
+    },
+  },
+});
+
+// Print the chart URL
+console.log(chart1.getUrl());
+
+const graficSummary = chart1.getUrl();
+
+// Get the image...
+// const image = await chart.toBinary();
+
+// Or write it to a file
+chart.toFile('chart.png');
 
     return(
 
@@ -101,6 +208,24 @@ export function Table(){
         </tbody>
     </table>
 
+    <div className="w-full flex justify-between p-10">
+      <div className="w-1/3 flex flex-col justify-center items-center">
+            
+      <div class="flex items-center justify-center px-4 py-2 rounded-md text-black">
+        <span class="mr-7 text-4xl">Ocupado</span>
+        <span class="inline-block w-10 h-10  bg-green-700"></span>
+      </div>
+
+      <div class="flex items-center justify-center px-4 py-2 rounded-md text-black">
+        <span class="mr-2 text-4xl">Cancelado</span>
+        <span class="inline-block w-10 h-10  bg-gray-300"></span>
+      </div>
+      </div>
+      <div className="w-full flex justify-end">
+        <img className="w-3/5" src={graficSummary} alt="" />
+      </div>
+    </div>
+
 
 
     {/* Reservas por canal */}
@@ -108,13 +233,13 @@ export function Table(){
 
     <h1 className="text-lg sm:text-left font-bold text-black py-0 p-10 sm:text-4xl">Reservas por canal</h1>
 
-    <table className="overflow-auto sm:w-full flex table-auto flex-col p-10 ">
-      <thead  className="w-auto overflow-auto sm:flex text-center">
-        <tr className="overflow-auto sm:w-full flex justify-center items-center">
+    <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-10 ">
+      <thead  className="flex text-center">
+        <tr className="w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Canal</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd Canc.</th>
-          <th className="flex sm:w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor de Vendas.</th>
+          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor de Vendas.</th>
 
         </tr>
       </thead>
@@ -140,13 +265,17 @@ export function Table(){
       </tbody>
     </table>
 
+        <div className="flex justify-center items-center">
+    <img className="" src={graficOrigens} alt="" />
+
+        </div>
     {/* Reservas por comissões */}
 
     <h1 className="text-lg sm:text-left font-bold text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
 
-    <table className="overflow-auto sm:w-full flex flex-col table-auto px-10">
-        <thead  className="overflow-auto sm:flex text-center">
-          <tr className="overflow-auto sm:w-full flex justify-center items-center">
+    <table className="w-full flex flex-col table-auto px-10">
+        <thead  className="flex text-center">
+          <tr className="w-full flex justify-center items-center">
             <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Número</th>
             <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Nome</th>
             <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Canal</th>
@@ -169,7 +298,7 @@ export function Table(){
                  
                     
                   <tbody className="text-sm sm:text-base">
-                      <tr className="overflow-auto sm:w-full flex text-center" key={item.id}>
+                      <tr className="w-full flex text-center " key={item.id}>
                         <td className="w-full text-left border-y border-black px-4 py-4">#{item.id}</td>
                         <td className="w-full text-left border-y border-black px-4 py-4">{item.primaryGuest.name}</td>
                         <td className="w-full text-left border-y border-black px-4 py-4">{item.origin}</td>
@@ -194,15 +323,15 @@ export function Table(){
                       </tr>
                           
 
-                      <table className="overflow-auto sm:flex flex-col justify-end items-end">
+                      <table className="flex flex-col justify-end items-end">
                       
-                        <tbody className="overflow-auto sm:w-full text-sm sm:text-base">
+                        <tbody className="w-full text-sm sm:text-base sm:w-full">
 
                              
 
                             
 
-                            <tr className="overflow-auto sm:w-full flex text-center">
+                            <tr className="w-full flex text-center">
 
                             <td className="w-full border-none text-left px-4 py-4"></td>
                             <td className="w-full border-none text-left px-4 py-4"></td>
@@ -221,7 +350,7 @@ export function Table(){
                               <td className="w-full text-left border-0 border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className="overflow-auto sm:flex text-center" >
+                            <tr className="flex text-center" >
 
                             <td className="w-full border-none text-left px-4 py-4"></td>
                             <td className="w-full border-none text-left px-4 py-4"></td>
@@ -237,7 +366,7 @@ export function Table(){
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className="overflow-auto sm:flex text-center" >
+                            <tr className=" flex text-center" >
 
                             <td className="w-full border-none text-left px-4 py-4"></td>
                             <td className="w-full border-none text-left px-4 py-4"></td>
@@ -253,7 +382,7 @@ export function Table(){
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
 
-                            <tr className="overflow-auto sm:flex text-center" >
+                            <tr className=" flex text-center" >
 
                               <td className="w-full border-none text-left px-4 py-4"></td>
                               <td className="w-full border-none text-left px-4 py-4"></td>
@@ -268,7 +397,7 @@ export function Table(){
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                               <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                             </tr>
-                            <tr className="overflow-auto sm:flex text-center" >
+                            <tr className=" flex text-center" >
 
 
                               <td className="w-full border-none text-left px-4 py-4"></td>
@@ -299,9 +428,9 @@ export function Table(){
 
     {/* total */}
 
-                      <table className="overflow-auto sm:flex flex-col px-10">
+                      <table className="flex flex-col px-10">
                             <tbody className="text-sm sm:text-base">
-                            <tr className="overflow-auto sm:w-full flex text-center" >
+                            <tr className="w-full flex text-center" >
                               <td className="w-full text-left font-bold border-b-0 border-y border-black px-4 py-4">Total</td>
                               <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
                               <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
