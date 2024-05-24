@@ -15,6 +15,7 @@ export function Table(){
 
     const canal_de_comissoes = data[0].bookings.bookings;
 
+
     // calcular a largura da tela
     // const viewportWidth = window.innerWidth;
     // console.log(viewportWidth)
@@ -33,17 +34,45 @@ chart.setHeight(300);
 chart.setVersion('2.9.4');
 
 
-canal_de_reservas[0].cancelado = canal_de_reservas[0].cancelledCount
+canal_de_reservas[0].Cancelado = resumo[0].statusCount.canceled
+
+
+
+const exemplo = []
+canal_de_reservas.forEach((item => {
+  var temp = Object.keys(item)
+    temp.forEach(item => {
+
+      exemplo.push(item)
+    })
+}))
+
 chart.setConfig({
   type: 'doughnut',
   data: {
-    labels: Object.keys(canal_de_reservas[0]),
-    datasets: [{ data: [canal_de_reservas[0].BookingCom.count, canal_de_reservas[0].Airbnb.count, resumo[0].statusCount.canceled]}],
+    // labels: Object.keys(canal_de_reservas[0]),
+    datasets: [
+      { 
+        data: [
+          canal_de_reservas[0].BookingCom.count, 
+          canal_de_reservas[0].Airbnb.count,
+          resumo[0].statusCount.canceled
+        ],
+        backgroundColor: ['green', '#3b82f6', '#eee'],
+      }
+    ],
   },
   options: {
     plugins: {
       doughnutlabel: {
-        labels: [{ text: resumo[0].bookingCount, font: { size: 20 } }, { text: 'Total' }],
+        labels: [
+          { 
+            text: resumo[0].bookingCount, 
+            font: { size: 20 } 
+          }, 
+          { 
+            text: 'Total' 
+        }],
       },
     },
   },
@@ -265,10 +294,41 @@ chart.toFile('chart.png');
       </tbody>
     </table>
 
-        <div className="flex justify-center items-center">
-    <img className="" src={graficOrigens} alt="" />
+    {/* Gráfico de reservas de canal */}
+        <div className="w-full flex justify-between p-10">
 
+            <div className="w-1/3 flex flex-col justify-center items-center">
+              {exemplo.map((item => 
+
+                <div class="flex justify-center items-center px-4 py-2 rounded-md text-black">
+                  <span className={
+                    // "mr-7 text-4xl"
+                    item === "BookingCom" ? "mr-3 text-4xl"
+                    : item === "Airbnb" ? "mr-28 text-4xl"
+                    : item === "Cancelado" ? "mr-12 text-4xl"
+                    : ""
+
+                  }>{item}
+                  </span>
+                  <span className=
+                  {
+                    item === "BookingCom" ? "inline-block w-10 h-10  bg-green-700"
+                    : item === "Airbnb" ? "inline-block w-10 h-10  bg-blue-500"
+                    : item === "Cancelado" ? "inline-block w-10 h-10  bg-[#eee]"
+                    : ""
+
+                  }
+                  ></span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="w-full flex justify-end">
+              <img className="w-3/4" src={graficOrigens} alt="" />
+            </div>
         </div>
+
+
     {/* Reservas por comissões */}
 
     <h1 className="text-lg sm:text-left font-bold text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
