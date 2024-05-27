@@ -25,10 +25,10 @@ export function Header(){
                     
                         <header  className="w-full flex flex-col p-10 gap-3">
                             
-                            <div className="w-full flex flex-col justify-center items-center sm:w-[70%] sm:flex-row sm:justify-between">
+                            {/* <div className="w-full flex flex-col justify-center items-center sm:w-[70%] sm:flex-row sm:justify-between">
                                 <p className="text-sm sm:w-32 text-center">{formatDate}</p>
                                 <p className="text-sm">Ayrton | finanças</p>
-                            </div>
+                            </div> */}
 
                             <div  className="w-full flex justify-between">
                                 <div className="hidden sm:flex flex-col gap-3">

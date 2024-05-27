@@ -321,18 +321,30 @@ var graficOrigensCommission = chart2.getUrl()
           <div className="w-full flex justify-between p-10">
             <div className="w-1/3 flex flex-col justify-center items-center">
                   
-            <div class="flex items-center justify-center px-4 py-2 rounded-md text-black">
-              <span class="mr-7 text-4xl">Ocupado</span>
-              <span class="inline-block w-10 h-10  bg-green-700"></span>
+            <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
+                <div>
+                  <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">Ocupado</span>
+                </div>
+                <div>
+                  <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                    <rect x="0" y="0" width="100" height="100" fill="#15803d" />
+                  </svg>
+                </div>
             </div>
 
-            <div class="flex items-center justify-center px-4 py-2 rounded-md text-black">
-              <span class="mr-2 text-4xl">Cancelado</span>
-              <span class="inline-block w-10 h-10  bg-gray-300"></span>
+            <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
+              <div>
+                <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">Cancelado</span>
+              </div>
+              <div>
+                <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                  <rect x="0" y="0" width="100" height="100" fill="#eee" />
+                </svg>
+              </div>
             </div>
             </div>
             <div className="w-full flex justify-end">
-              <img className="w-3/5" src={graficSummary} alt="" />
+              <img className="w-1/2" src={graficSummary} alt="" />
             </div>
           </div>
 
@@ -381,29 +393,34 @@ var graficOrigensCommission = chart2.getUrl()
             <div className="w-1/3 flex flex-col justify-center items-center">
               {exemplo.map((item => 
 
-                <div class="flex justify-center items-center px-4 py-2 rounded-md text-black">
-                  <span className={
-                    // "mr-7 text-4xl"
-                    item === "BookingCom" ? "mr-3 text-4xl"
-                    : item === "Airbnb" ? "mr-28 text-4xl"
-                    : item === "Cancelado" ? "mr-12 text-4xl"
-                    : ""
-                  }>{item}
-                  </span>
-                  <span className=
-                  {
-                    item === "BookingCom" ? "inline-block w-10 h-10  bg-green-700"
-                    : item === "Airbnb" ? "inline-block w-10 h-10  bg-blue-500"
-                    : item === "Cancelado" ? "inline-block w-10 h-10  bg-[#eee]"
-                    : ""
-                  }
-                  >&nbsp;</span>
+                <div class="w-full flex justify-between items-center px-4 py-2 rounded-md text-black">
+                  <div>
+                    <span className={
+                      // "mr-7 text-4xl"
+                      item === "BookingCom" ? "text-lg font-bold mr-3 md:text-4xl md:font-normal"
+                      : item === "Airbnb" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
+                      : item === "Cancelado" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
+                      : ""
+                    }>{item}
+                    </span>
+                  </div>
+                    
+                  <div>
+                    <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                        {
+                        item  == "BookingCom" ? <rect x="0" y="0" width="100" height="100" fill="#15803d" />
+                        : item == "Airbnb" ? <rect x="0" y="0" width="100" height="100" fill="#3b82f6" />
+                        : item  == "Cancelado" ? <rect x="0" y="0" width="100" height="100" fill="#eee" />
+                        : ""
+                        }  
+                    </svg>
+                  </div>
                 </div>
               ))}
             </div>
             
             <div className="w-full flex justify-end">
-              <img className="w-3/4" src={graficOrigens} alt="" />
+              <img className="w-1/2" src={graficOrigens} alt="" />
             </div>
         </div>
 
@@ -562,36 +579,39 @@ var graficOrigensCommission = chart2.getUrl()
             <div className="w-1/3 flex flex-col justify-center items-center">
               {formattedStatusCounts.map((item => 
 
-                <div class="flex justify-center items-center px-4 py-2 rounded-md text-black">
-                  <span className={
-                    // "mr-7 text-4xl"
-                    Object.keys(item) == "inConfirmation" ? "mr-3 text-4xl"
-                    : Object.keys(item) == "confirmed" ? "mr-16 text-4xl"
-                    : Object.keys(item) == "cancelled" ? "mr-24 text-4xl"
+                <div class="w-full flex justify-between items-center px-4 py-2 rounded-md text-black">
+                  <div>
+                    <span className={
+                      Object.keys(item) == "inConfirmation" ? "text-xl font-bold lg:mr-3 lg:text-4xl lg:font-normal"
+                      : Object.keys(item) == "confirmed" ? "text-xl font-bold lg:mr-16 lg:text-4xl lg:font-normal"
+                      : Object.keys(item) == "cancelled" ? "text-xl font-bold lg:mr-24 lg:text-4xl lg:font-normal"
+                      : ""
+                    }>
+                    {
+                    Object.keys(item) == "inConfirmation" ? "Em confirmação"
+                    : Object.keys(item) == "confirmed" ? "Confirmado"
+                    :  Object.keys(item) == "cancelled" ? "Cancelado"
                     : ""
-                  }>
-                  {
+                    }
+                    </span>
+                  </div>
                   
-                  Object.keys(item) == "inConfirmation" ? "Em confirmação"
-                  : Object.keys(item) == "confirmed" ? "Confirmado"
-                  :  Object.keys(item) == "cancelled" ? "Cancelado"
-                  : ""
-                  }
-                  </span>
-                  <span className=
-                  {
-                    Object.keys(item) == "inConfirmation" ? "inline-block w-10 h-10  bg-blue-500"
-                    : Object.keys(item)== "cancelled" ? "inline-block w-10 h-10  bg-[#eee]"
-                    : Object.keys(item) == "confirmed" ? "inline-block w-10 h-10  bg-green-700"
-                    : ""
-                  }
-                  >&nbsp;</span>
+                    <div>
+                      <svg className="w-7 h-7 lg:inline-block lg:w-10 lg:h-10">
+                      {
+                      Object.keys(item) == "inConfirmation" ? <rect x="0" y="0" width="100" height="100" fill="#3b82f6" />
+                      : Object.keys(item)== "cancelled" ? <rect x="0" y="0" width="100" height="100" fill="#eee" />
+                      : Object.keys(item) == "confirmed" ? <rect x="0" y="0" width="100" height="100" fill="#15803d" />
+                      : ""
+                      }  
+                      </svg>
+                    </div>
                 </div>
               ))}
             </div>
             
             <div className="w-full flex justify-end">
-              <img className="w-3/4" src={graficOrigensCommission} alt="" />
+              <img className="w-1/2" src={graficOrigensCommission} alt="" />
             </div>
         </div>
 
