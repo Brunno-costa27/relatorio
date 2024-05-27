@@ -11,7 +11,6 @@ export function Header(){
     const method = data[0].bookings.bookings[0].roomType.meta.comissionFee
     
     
-    header.forEach(element => console.log(element.name))
     
     const dateString = new Date();
     const formatDate = moment(dateString).format("DD/MM/YYYY, h:mm");
