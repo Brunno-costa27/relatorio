@@ -1,0 +1,23 @@
+{
+    "translation": {
+        "header": {
+            "property": "Property",
+            "period": "Period",
+            "method": "Method"
+        },
+        "summary": {
+            "summary": "summary",
+            "occupation": "Occupation",
+            "totalReservations": "Total Reservations",
+            "averageStay": "Average Stay",
+            "averageDailyRate": "Average Daily Rate",
+            "canceledReservations": "Canceled Reservations",
+            "totalValueInDailyRates": "Total Value in Daily Rates",
+            "totalValueInFees": "Total Value in Fees",
+            "graphic": {
+                "occupation": "Occupation",
+                "canceled": "Canceled"
+            }
+        }
+    }
+}

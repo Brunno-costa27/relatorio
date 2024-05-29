@@ -1,0 +1,23 @@
+{
+    "translation": {
+        "header": {
+            "property": "imovél",
+            "period": "período",
+            "method": "Método"
+        },
+        "summary": {
+            "summary": "Resumo",
+            "occupation": "Ocupação",
+            "totalReservations": "Total de Reservas",
+            "averageStay": "Estadia Média",
+            "averageDailyRate": "Diária Média",
+            "canceledReservations": "Reservas Canceladas",
+            "totalValueInDailyRates": "Valor Total em Diárias",
+            "totalValueInFees": "Valor Total em Taxas",
+            "graphic": {
+                "occupation": "Ocupação",
+                "canceled": "Cancelados"
+            }
+        }
+    }
+}

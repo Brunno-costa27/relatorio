@@ -2,8 +2,11 @@ import data from "../database/data-set"
 import formatNumber from "../functions/functions.js"
 import moment from 'moment';
 import QuickChart from "quickchart-js"
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-export function Table(){
+
+export function Table({t, language}){
 
     const resumo = [
       data[0].bookings.summary
@@ -242,13 +245,27 @@ chart2.setConfig({
 
 var graficOrigensCommission = chart2.getUrl() 
 
+
+// // TRADUÇÃO
+//     const { t, i18n: { changeLanguage, language}, } = useTranslation()
+
+//     const [currentLanguage, setCurrentLanguage] = useState(language)
+
+
+//     function handleChangeLanguage(){
+//         const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
+        
+//         changeLanguage(newLanguage)
+//         setCurrentLanguage(newLanguage)
+//     }
+
     return(
 
         <>
-        <table className="w-full flex flex-col table-auto p-10 ">
+        <table className="w-full font-sans flex flex-col table-auto p-10 ">
             <thead>
                 <tr>
-                <th className="text-lg sm:text-left font-bold text-black py-4 sm:text-4xl">Resumo</th>
+                <th className="text-lg sm:text-left  font-normal text-black py-4 sm:text-4xl">{t('summary.summary')}</th>
                 </tr>
             </thead>
 
@@ -258,7 +275,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left border-y text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Ocupação</div>
+                    <div className="text-black">{t('summary.occupation')}</div>
                     <div className="text-black">{((item.bookingCount-item.cancelattionSummary.count)/item.bookingCount*100).toFixed(2)}%</div>
                     </div>
                 </td>
@@ -266,7 +283,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left  text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Total de Reservas</div>
+                    <div className="text-black">{t('summary.totalReservations')}</div>
                     <div className="text-black">{item.bookingCount}</div>
                     </div>
                 </td>
@@ -274,7 +291,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left border-y text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Estadia Média</div>
+                    <div className="text-black">{t('summary.averageStay')}</div>
                     <div className="text-black">{item.avgLengthOfStayPerBooking.toFixed(2)}</div>
                     </div>
                 </td>
@@ -282,7 +299,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left  text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Diária Média</div>
+                    <div className="text-black">{t('summary.averageDailyRate')}</div>
                     <div className="text-black">R$ {formatNumber(item.avgBookingValuePerDay)}</div>
                     </div>
                 </td>
@@ -290,7 +307,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left border-y text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Reservas Canceladas</div>
+                    <div className="text-black">{t('summary.canceledReservations')}</div>
                     <div className="text-black">{item.cancelattionSummary.count}</div>
                     </div>
                 </td>
@@ -298,7 +315,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left  text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Valor Total em Diárias</div>
+                    <div className="text-black">{t('summary.totalValueInDailyRates')}</div>
                     <div className="text-black">R$ {formatNumber(item.bookingValue)}</div>
                     </div>
                 </td>
@@ -306,7 +323,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <tr className="flex">
                 <td className="w-full text-left border-y text-black border-black px-4 py-2">
                     <div className="flex justify-between">
-                    <div className="text-black">Valor Total em Taxas</div>
+                    <div className="text-black">{t('summary.totalValueInFees')}</div>
                     <div className="text-black">R$ {formatNumber(item.taxTotal)}</div>
                     </div>
                 </td>
@@ -323,10 +340,10 @@ var graficOrigensCommission = chart2.getUrl()
                   
             <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
                 <div>
-                  <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">Ocupado</span>
+                  <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">{t('summary.graphic.occupation')}</span>
                 </div>
                 <div>
-                  <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                  <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10  rounded-full">
                     <rect x="0" y="0" width="100" height="100" fill="#15803d" />
                   </svg>
                 </div>
@@ -334,10 +351,10 @@ var graficOrigensCommission = chart2.getUrl()
 
             <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
               <div>
-                <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">Cancelado</span>
+                <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">{t('summary.graphic.canceled')}</span>
               </div>
               <div>
-                <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10 rounded-full">
                   <rect x="0" y="0" width="100" height="100" fill="#eee" />
                 </svg>
               </div>
@@ -353,7 +370,7 @@ var graficOrigensCommission = chart2.getUrl()
     {/* Reservas por canal */}
 
 
-    <h1 className="text-lg sm:text-left font-bold text-black py-0 p-10 sm:text-4xl">Reservas por canal</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-10 sm:text-4xl">Reservas por canal</h1>
 
     <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-10 ">
       <thead  className="flex text-center">
@@ -406,7 +423,7 @@ var graficOrigensCommission = chart2.getUrl()
                   </div>
                     
                   <div>
-                    <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10">
+                    <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10  rounded-full">
                         {
                         item  == "BookingCom" ? <rect x="0" y="0" width="100" height="100" fill="#15803d" />
                         : item == "Airbnb" ? <rect x="0" y="0" width="100" height="100" fill="#3b82f6" />
@@ -427,7 +444,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Reservas por comissões */}
 
-    <h1 className="text-lg sm:text-left font-bold text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
 
     <table className="w-full flex flex-col table-auto px-10">
       <thead  className="flex text-center">
@@ -597,7 +614,7 @@ var graficOrigensCommission = chart2.getUrl()
                   </div>
                   
                     <div>
-                      <svg className="w-7 h-7 lg:inline-block lg:w-10 lg:h-10">
+                      <svg className="w-7 h-7 lg:inline-block lg:w-10 lg:h-10  rounded-full">
                       {
                       Object.keys(item) == "inConfirmation" ? <rect x="0" y="0" width="100" height="100" fill="#3b82f6" />
                       : Object.keys(item)== "cancelled" ? <rect x="0" y="0" width="100" height="100" fill="#eee" />
@@ -617,7 +634,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Taxas */}
 
-    <h1 className="text-lg sm:text-left font-bold text-black py-5 p-10 sm:text-4xl">Taxas</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-10 sm:text-4xl">Taxas</h1>
 
     <table className="w-full flex flex-col justify-between  table-auto px-10">
             <thead className="">
@@ -702,7 +719,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Despesas e ajustes */}
 
-    <h1 className="text-lg sm:text-left font-bold text-black p-10 sm:text-4xl">Despesas e ajustes</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black p-10 sm:text-4xl">Despesas e ajustes</h1>
 
     <table className="w-full flex flex-col table-auto px-10">
       <thead  className="flex text-center">
@@ -732,7 +749,7 @@ var graficOrigensCommission = chart2.getUrl()
     <table className="w-full flex flex-col table-auto p-10">
             <thead>
                 <tr>
-                <th className="text-lg sm:text-left font-bold text-black py-4 sm:text-4xl">Totais</th>
+                <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">Totais</th>
                 </tr>
             </thead>
         <tbody className="text-sm sm:text-base">
