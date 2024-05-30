@@ -2,11 +2,31 @@ import data from "../database/data-set"
 import formatNumber from "../functions/functions.js"
 import moment from 'moment';
 import QuickChart from "quickchart-js"
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+
 
 
 export function Table({t, language}){
+
+
+
+
+    function converterRealParaDolar(valorEmReais, taxaDeCambio) {
+      // Verifique se o valor em reais é um número válido
+      if (typeof valorEmReais !== 'number' || isNaN(valorEmReais)) {
+        throw new Error('Valor em reais inválido. Deve ser um número.');
+      }
+
+      // Verifique se a taxa de câmbio é um número válido
+      if (typeof taxaDeCambio !== 'number' || isNaN(taxaDeCambio)) {
+        throw new Error('Taxa de câmbio inválida. Deve ser um número.');
+      }
+
+      // Converta o valor em reais para dólares
+      const valorEmDolares = valorEmReais / taxaDeCambio;
+
+      // Retorne o valor em dólares
+      return valorEmDolares;
+    }
 
     const resumo = [
       data[0].bookings.summary
@@ -300,7 +320,8 @@ var graficOrigensCommission = chart2.getUrl()
                 <td className="w-full text-left  text-black border-black px-4 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.averageDailyRate')}</div>
-                    <div className="text-black">R$ {formatNumber(item.avgBookingValuePerDay)}</div>
+                    <div className="text-black">{t('summary.averageDailyRateValue', {
+                      value: language === "en" ? converterRealParaDolar(item.avgBookingValuePerDay, 5.20).toFixed(2) : formatNumber(item.avgBookingValuePerDay)})}</div>
                     </div>
                 </td>
                 </tr>
@@ -316,7 +337,8 @@ var graficOrigensCommission = chart2.getUrl()
                 <td className="w-full text-left  text-black border-black px-4 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInDailyRates')}</div>
-                    <div className="text-black">R$ {formatNumber(item.bookingValue)}</div>
+                    <div className="text-black">{t('summary.totalValueInDailyRatesValue', {
+                      value: language === "en" ? converterRealParaDolar(item.bookingValue, 5.20).toFixed(2) : formatNumber(item.bookingValue)})}</div>
                     </div>
                 </td>
                 </tr>
@@ -324,7 +346,9 @@ var graficOrigensCommission = chart2.getUrl()
                 <td className="w-full text-left border-y text-black border-black px-4 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInFees')}</div>
-                    <div className="text-black">R$ {formatNumber(item.taxTotal)}</div>
+                    <div className="text-black">{t('summary.totalValueInFeesValue', {
+                      value: language === "en" ? converterRealParaDolar(item.taxTotal, 5.20).toFixed(2) : formatNumber(item.taxTotal)
+                    })}</div>
                     </div>
                 </td>
                 </tr>
@@ -370,15 +394,15 @@ var graficOrigensCommission = chart2.getUrl()
     {/* Reservas por canal */}
 
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-10 sm:text-4xl">Reservas por canal</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-10 sm:text-4xl">{t('ReservationsByChannel.title')}</h1>
 
     <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-10 ">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
-          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Canal</th>
+          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('ReservationsByChannel.table.channel')}</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd Canc.</th>
-          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor de Vendas.</th>
+          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">{t('ReservationsByChannel.table.salesValue')}</th>
 
         </tr>
       </thead>
@@ -390,14 +414,18 @@ var graficOrigensCommission = chart2.getUrl()
             <td className="w-full text-left  border-black px-4 py-4">BookingCom</td>
             <td className="w-full  text-left  border-black px-4 py-4">{item.BookingCom.count}</td>
             <td className="w-full text-left  border-black px-4 py-4">{item.BookingCom.cancelledCount}</td>
-            <td className="w-full text-right  border-black px-4 py-4">R$ {formatNumber(item.BookingCom.bookingValue)}</td>
+            <td className="w-full text-right  border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
+              value: language === "en" ? converterRealParaDolar(item.BookingCom.bookingValue, 5.20).toFixed(2) : formatNumber(item.BookingCom.bookingValue)
+            })}</td>
         </tr>
 
           <tr className="w-full flex text-center">
             <td className="w-full text-left border-y border-black px-4 py-4">Airbnb</td>
             <td className="w-full  text-left border-y border-black px-4 py-4">{item.Airbnb.count}</td>
             <td className="w-full text-left border-y border-black px-4 py-4">{item.Airbnb.cancelledCount}</td>
-            <td className="w-full text-right border-y border-black px-4 py-4">R$ {formatNumber(item.Airbnb.bookingValue)}</td>
+            <td className="w-full text-right border-y border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
+              value: language === "en" ? converterRealParaDolar(item.Airbnb.bookingValue, 5.20).toFixed(2) : formatNumber(item.Airbnb.bookingValue)
+            })}</td>
           </tr>
           
           </>
@@ -418,7 +446,7 @@ var graficOrigensCommission = chart2.getUrl()
                       : item === "Airbnb" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
                       : item === "Cancelado" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
                       : ""
-                    }>{item}
+                    }>{item === "Cancelado" ? t('ReservationsByChannel.table.cancel') : item}
                     </span>
                   </div>
                     

@@ -1,8 +1,8 @@
 {
     "translation": {
         "header": {
-            "property": "imovél",
-            "period": "período",
+            "property": "Imovél",
+            "period": "Período",
             "method": "Método"
         },
         "summary": {
@@ -11,12 +11,27 @@
             "totalReservations": "Total de Reservas",
             "averageStay": "Estadia Média",
             "averageDailyRate": "Diária Média",
+            "averageDailyRateValue": "R$ {{value}}",
             "canceledReservations": "Reservas Canceladas",
             "totalValueInDailyRates": "Valor Total em Diárias",
+            "totalValueInDailyRatesValue": "R$ {{value}}",
             "totalValueInFees": "Valor Total em Taxas",
+            "totalValueInFeesValue": "R$ {{value}}",
+
             "graphic": {
                 "occupation": "Ocupação",
                 "canceled": "Cancelados"
+            }
+        },
+        "ReservationsByChannel": {
+            "title": "Reservas por canal",
+            "table": {
+                "channel": "Canal",
+                "salesValue": "Valor de vendas.",
+                "bookingCom": "R$ {{value}}",
+                "airbnb": "R$ {{value}}",
+                "cancel": "Cancelado"
+
             }
         }
     }
