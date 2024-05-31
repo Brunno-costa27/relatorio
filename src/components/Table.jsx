@@ -1,6 +1,9 @@
 import data from "../database/data-set"
 import formatNumber from "../functions/functions.js"
 import moment from 'moment';
+import 'moment/min/locales'
+// moment.locale('US')
+
 import QuickChart from "quickchart-js"
 
 
@@ -8,25 +11,6 @@ import QuickChart from "quickchart-js"
 export function Table({t, language}){
 
 
-
-
-    function converterRealParaDolar(valorEmReais, taxaDeCambio) {
-      // Verifique se o valor em reais é um número válido
-      if (typeof valorEmReais !== 'number' || isNaN(valorEmReais)) {
-        throw new Error('Valor em reais inválido. Deve ser um número.');
-      }
-
-      // Verifique se a taxa de câmbio é um número válido
-      if (typeof taxaDeCambio !== 'number' || isNaN(taxaDeCambio)) {
-        throw new Error('Taxa de câmbio inválida. Deve ser um número.');
-      }
-
-      // Converta o valor em reais para dólares
-      const valorEmDolares = valorEmReais / taxaDeCambio;
-
-      // Retorne o valor em dólares
-      return valorEmDolares;
-    }
 
     const resumo = [
       data[0].bookings.summary
@@ -321,7 +305,7 @@ var graficOrigensCommission = chart2.getUrl()
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.averageDailyRate')}</div>
                     <div className="text-black">{t('summary.averageDailyRateValue', {
-                      value: language === "en" ? converterRealParaDolar(item.avgBookingValuePerDay, 5.20).toFixed(2) : formatNumber(item.avgBookingValuePerDay)})}</div>
+                      value:  formatNumber(item.avgBookingValuePerDay)})}</div>
                     </div>
                 </td>
                 </tr>
@@ -338,7 +322,7 @@ var graficOrigensCommission = chart2.getUrl()
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInDailyRates')}</div>
                     <div className="text-black">{t('summary.totalValueInDailyRatesValue', {
-                      value: language === "en" ? converterRealParaDolar(item.bookingValue, 5.20).toFixed(2) : formatNumber(item.bookingValue)})}</div>
+                      value:  formatNumber(item.bookingValue)})}</div>
                     </div>
                 </td>
                 </tr>
@@ -347,7 +331,7 @@ var graficOrigensCommission = chart2.getUrl()
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInFees')}</div>
                     <div className="text-black">{t('summary.totalValueInFeesValue', {
-                      value: language === "en" ? converterRealParaDolar(item.taxTotal, 5.20).toFixed(2) : formatNumber(item.taxTotal)
+                      value:  formatNumber(item.taxTotal)
                     })}</div>
                     </div>
                 </td>
@@ -415,7 +399,7 @@ var graficOrigensCommission = chart2.getUrl()
             <td className="w-full  text-left  border-black px-4 py-4">{item.BookingCom.count}</td>
             <td className="w-full text-left  border-black px-4 py-4">{item.BookingCom.cancelledCount}</td>
             <td className="w-full text-right  border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-              value: language === "en" ? converterRealParaDolar(item.BookingCom.bookingValue, 5.20).toFixed(2) : formatNumber(item.BookingCom.bookingValue)
+              value: formatNumber(item.BookingCom.bookingValue)
             })}</td>
         </tr>
 
@@ -424,7 +408,7 @@ var graficOrigensCommission = chart2.getUrl()
             <td className="w-full  text-left border-y border-black px-4 py-4">{item.Airbnb.count}</td>
             <td className="w-full text-left border-y border-black px-4 py-4">{item.Airbnb.cancelledCount}</td>
             <td className="w-full text-right border-y border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-              value: language === "en" ? converterRealParaDolar(item.Airbnb.bookingValue, 5.20).toFixed(2) : formatNumber(item.Airbnb.bookingValue)
+              value: formatNumber(item.Airbnb.bookingValue)
             })}</td>
           </tr>
           
@@ -472,22 +456,22 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Reservas por comissões */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-10 px-10 sm:text-4xl">Reservas por comissões</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-10 px-10 sm:text-4xl">{t('commissionBookings.title')}</h1>
 
     <table className="w-full flex flex-col table-auto px-10">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
-          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Número</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Nome</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Canal</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">In</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Out</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Status</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Item</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Valor</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Calc.</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Comissão</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Proprietário</th>
+          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('commissionBookings.header.number')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.name')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.channel')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.in')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.oct')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.status')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.item')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.value')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.calc')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.commission')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.owner')}</th>
 
 
         </tr>
@@ -499,24 +483,34 @@ var graficOrigensCommission = chart2.getUrl()
               <td className="w-full text-left border-y border-black px-4 py-4">#{item.id}</td>
               <td className="w-full text-left border-y border-black px-4 py-4">{item.primaryGuest.name}</td>
               <td className="w-full text-left border-y border-black px-4 py-4">{item.origin}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{moment(item.checkIn).format("DD/MM/YYYY")}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{moment(item.checkOut).format("DD/MM/YYYY")}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
               <td className="w-full text-left border-y border-black px-4 py-4">
                 {
-                  item.status === 'inConfirmation'
-                  ? 'Em Confirmação.'
-                  : item.status === 'cancelled'
-                  ? 'Cancel.'
-                  : item.status === "confirmed"
-                  ? 'Confirmado.'
-                  : item.status
+                  language === 'en' ? item.status : item.status === "inConfirmation" ? "Em confirmação"
+                  : language === 'en' ? item.status : item.status === "cancelled" ? "Cancelado"
+                  : language === 'en' ? item.status : item.status === "confirmed" ? "Confirmado"
+                  : item.status 
+                  // item.status === 'inConfirmation'
+                  // ? 'Em Confirmação.'
+                  // : item.status === 'cancelled'
+                  // ? 'Cancel.'
+                  // : item.status === "confirmed"
+                  // ? 'Confirmado.'
+                  // : item.status
                   }
               </td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{item.bill[0].services[0].name}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4 ">R$ {formatNumber(item.values.comissions.rateValue)}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.daily')}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4 ">{t('commissionBookings.bookings.valueCommission', {
+                value: formatNumber(item.values.comissions.rateValue)
+              })}</td>
               <td className="w-full text-left border-y border-black px-4 py-4 font-bold">20%</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.comissions.RATES)}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">R$ {formatNumber(item.values.comissions.ownerValue)}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.commission', {
+                value: formatNumber(item.values.comissions.comissions.RATES)
+              })}</td>
+              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.owner', {
+                value: formatNumber(item.values.comissions.ownerValue)
+              })}</td>
             </tr>
                 
 
@@ -585,10 +579,16 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full text-left font-bold border-0 border-black px-4 py-4">Total</td>
-                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">R$ {formatNumber(item.values.rateValue)}</td>
+                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.valueSum', {
+                    value: formatNumber(item.values.rateValue)
+                  })}</td>
                   <td className="w-full  text-left font-bold border-0 border-black px-4 py-4"></td>
-                  <td className="w-full text-left font-bold border-0 border-black px-4 py-4">R$ {formatNumber(item.values.comissions.totalComission)}</td>
-                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">R$ {formatNumber(item.values.comissions.ownerValue)}</td>
+                  <td className="w-full text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.commissionSum', {
+                    value: formatNumber(item.values.comissions.totalComission)
+                  })}</td>
+                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.ownerSum', {
+                    value: formatNumber(item.values.comissions.ownerValue)
+                  })}</td>
                 </tr>
               </tbody>
             </table> 

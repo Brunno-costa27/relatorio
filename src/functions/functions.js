@@ -5,16 +5,11 @@
     });
   };
 
-  const formatarMoeda = (numero) => {
-    const local = t('locale'); // Obtenha o local atual
-    const numeroFormatado = new Intl.NumberFormat(local, {
-      style: 'currency',
-      currency: 'BRL', // Substitua pelo código de moeda apropriado
-    }).format(numero);
-    return numeroFormatado;
-  };
+  export const formatCoin = (num, currency) => {
+    return num?.toLocaleString('pt-br', {  style: "currency", currency: currency ||  "BRL"})
+  }
 
   
 
-  export default formatNumber;formatarMoeda
+  export default formatNumber
   

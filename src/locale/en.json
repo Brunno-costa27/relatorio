@@ -31,6 +31,34 @@
                 "airbnb": "$ {{value}}", 
                 "cancel": "cancel"
             }
+        },
+        "commissionBookings": {
+            "title":"Commission bookings",
+            "header": {
+                "number": "Number",
+                "name": "Name",
+                "channel": "Channel",
+                "in": "In",
+                "oct": "Out",
+                "status": "Status",
+                "item": "Item",
+                "value": "Value",
+                "calc": "Calc",
+                "commission": "Commission",
+                "owner": "Owner"
+            },
+            "bookings":{
+                "daily": "Daily",
+                "valueCommission": "$ {{value}}",
+                "commission": "$ {{value}}",
+                "owner": "$ {{value}}"
+            },
+            "total": {
+                "valueSum": "$ {{value}}",
+                "commissionSum": "$ {{value}}",
+                "ownerSum": "$ {{value}}"
+            }
+
         }
     }
 }

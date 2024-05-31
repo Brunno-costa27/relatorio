@@ -33,6 +33,33 @@
                 "cancel": "Cancelado"
 
             }
+        },
+        "commissionBookings": {
+            "title":"Reservas por commissões",
+            "header": {
+                "number": "Número",
+                "name": "Nome",
+                "channel": "Canal",
+                "in": "In",
+                "oct": "Out",
+                "status": "Status",
+                "item": "Item",
+                "value": "Valor",
+                "calc": "Calc",
+                "commission": "Commissão",
+                "owner": "Propritário"
+            },
+            "bookings":{
+                "daily": "Diárias",
+                "valueCommission": "R$ {{value}}",
+                "commission": "R$ {{value}}",
+                "owner": "R$ {{value}}"
+            },
+            "total": {
+                "valueSum": "R$ {{value}}",
+                "commissionSum": "R$ {{value}}",
+                "ownerSum": "R$ {{value}}"
+            }
         }
     }
 }
