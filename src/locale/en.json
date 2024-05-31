@@ -57,7 +57,17 @@
                 "valueSum": "$ {{value}}",
                 "commissionSum": "$ {{value}}",
                 "ownerSum": "$ {{value}}"
+            }, 
+            "totalCommission": {
+                "commission": "$ {{value}}",
+                "owner": "$ {{value}}"
+            },
+            "ghapic": {
+                "inConfirmation": "In Confirmation",
+                "canceled": "Canceled",
+                "confirmed": "Confirmado"
             }
+
 
         }
     }

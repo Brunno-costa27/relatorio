@@ -480,35 +480,28 @@ var graficOrigensCommission = chart2.getUrl()
           canal_de_comissoes.map((item) => (
           <tbody className="text-sm sm:text-base">
             <tr className="w-full flex text-center " key={item.id}>
-              <td className="w-full text-left border-y border-black px-4 py-4">#{item.id}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{item.primaryGuest.name}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{item.origin}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">#{item.id}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.primaryGuest.name}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.origin}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">
                 {
                   language === 'en' ? item.status : item.status === "inConfirmation" ? "Em confirmação"
                   : language === 'en' ? item.status : item.status === "cancelled" ? "Cancelado"
                   : language === 'en' ? item.status : item.status === "confirmed" ? "Confirmado"
                   : item.status 
-                  // item.status === 'inConfirmation'
-                  // ? 'Em Confirmação.'
-                  // : item.status === 'cancelled'
-                  // ? 'Cancel.'
-                  // : item.status === "confirmed"
-                  // ? 'Confirmado.'
-                  // : item.status
                   }
               </td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.daily')}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4 ">{t('commissionBookings.bookings.valueCommission', {
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.daily')}</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4 ">{t('commissionBookings.bookings.valueCommission', {
                 value: formatNumber(item.values.comissions.rateValue)
               })}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4 font-bold">20%</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.commission', {
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4 font-bold">20%</td>
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.commission', {
                 value: formatNumber(item.values.comissions.comissions.RATES)
               })}</td>
-              <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.bookings.owner', {
+              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.owner', {
                 value: formatNumber(item.values.comissions.ownerValue)
               })}</td>
             </tr>
@@ -523,11 +516,11 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-0 border-black px-4 py-4">Limp.</td>
-                  <td className="w-full text-left border-0 border-black px-4 py-4">R$ </td>
-                  <td className="w-full text-left border-0 border-black px-4 py-4">100%</td>
-                  <td className="w-full text-left border-0 border-black px-4 py-4">R$ 0,00</td>
-                  <td className="w-full text-left border-0 border-black px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">Limp.</td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ </td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">100%</td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ 0,00</td>
                 </tr>
 
                 <tr className="flex text-center" >
@@ -537,7 +530,7 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">Serv.</td>
+                  <td className="w-full text-left border-y border-black  px-4 py-4">Serv.</td>
                   <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                   <td className="w-full text-left border-y border-black px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
@@ -551,11 +544,11 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">Util.</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Util.</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
                 </tr>
 
                 <tr className=" flex text-center" >
@@ -565,11 +558,11 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">Outras</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Outras</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
                 </tr>
                 <tr className=" flex text-center" >
                   <td className="w-full border-none text-left px-4 py-4"></td>
@@ -611,9 +604,13 @@ var graficOrigensCommission = chart2.getUrl()
                               <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
                               <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
 
-                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ </td>
-                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.totalComission)}</td>
-                              <td className="w-full text-left font-bold border-b-0 border-y  border-black px-4 py-4">R$ {formatNumber(resumo[0].comissions.ownerValue)}</td>
+                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4"> </td>
+                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">{t('commissionBookings.totalCommission.commission', {
+                                value: formatNumber(resumo[0].comissions.totalComission)
+                              })}</td>
+                              <td className="w-full text-left font-bold border-b-0 border-y  border-black px-4 py-4">{t('commissionBookings.totalCommission.owner', {
+                                value: formatNumber(resumo[0].comissions.ownerValue)
+                              })}</td>
                             </tr>
                             </tbody>
                       </table>
@@ -633,10 +630,10 @@ var graficOrigensCommission = chart2.getUrl()
                       : ""
                     }>
                     {
-                    Object.keys(item) == "inConfirmation" ? "Em confirmação"
-                    : Object.keys(item) == "confirmed" ? "Confirmado"
-                    :  Object.keys(item) == "cancelled" ? "Cancelado"
-                    : ""
+                    language === 'en' ? Object.keys(item) : Object.keys(item) == "inConfirmation" ? "Em confimação"
+                    : language === 'en' ?  Object.keys(item) : Object.keys(item) == "cancelled"  ? "Cancelado"
+                    : language === 'en' ? Object.keys(item) : Object.keys(item) == "confirmed" ? "Confirmado"
+                    : Object.keys(item)   
                     }
                     </span>
                   </div>
@@ -683,7 +680,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className="text-black-800">Taxas de roupa de cama</div>
                 <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.LINEN_FEE)}</div>
@@ -691,7 +688,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Taxa de serviço</div>
                 <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)}</div>
@@ -699,7 +696,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Taxas de roupa de Utility</div>
                 <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)}</div>
@@ -707,7 +704,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Taxas Outras</div>
                 <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.OTHER_FEE)}</div>
@@ -715,7 +712,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Valor Total em Diárias</div>
                 <div className="text-black font-bold">R$ --</div>
@@ -723,7 +720,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-gray-800">Valor Total em Taxas</div>
                 <div className="text-black font-bold">R$ 627,00</div>
@@ -732,7 +729,7 @@ var graficOrigensCommission = chart2.getUrl()
             </tr>
 
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">Total</div>
                 <div className="text-black font-bold">R$ 627,00</div>
@@ -762,10 +759,10 @@ var graficOrigensCommission = chart2.getUrl()
       <tbody className="text-sm sm:text-base">
         {reservas_canal.map((item) => (
           <tr className="w-full flex text-center" key={item.categoria}>
-            <td className="w-full text-left border-y border-black px-4 py-4 font-bold">Total</td>
-            <td className="w-full  text-left border-y border-black px-4 py-4 font-bold"></td>
-            <td className="w-full text-left border-y border-black px-4 py-4 font-bold">{item.subvalor}</td>
-            <td className="w-full text-right border-y border-black px-4 py-4 font-bold">{item.subvalor}</td>
+            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">Total</td>
+            <td className="w-full  text-left border-y border-black px-4 py-4 border-t-0  font-bold"></td>
+            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{item.subvalor}</td>
+            <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{item.subvalor}</td>
           </tr>
         ))}
       </tbody>
@@ -784,7 +781,7 @@ var graficOrigensCommission = chart2.getUrl()
             {resumo.map((item) => (
                 <>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black  px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black">Total de Administrador em comissões</div>
                 <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>
@@ -792,7 +789,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className="text-black">Deduções Administrador</div>
                 <div className="text-black">R$ --</div>
@@ -800,7 +797,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black">Total Proprietário em Repasses</div>
                 <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
@@ -808,7 +805,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black">Deduções Proprietário</div>
                 <div className="text-black">R$ 285,86</div>
@@ -816,7 +813,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">Subtotal Proprietário</div>
                 <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
@@ -824,7 +821,7 @@ var graficOrigensCommission = chart2.getUrl()
             </td>
             </tr>
             <tr className="flex">
-            <td className="w-full text-left border-y border-black px-4 py-2">
+            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">Subtotal Administrador</div>
                 <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>

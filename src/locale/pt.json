@@ -35,7 +35,7 @@
             }
         },
         "commissionBookings": {
-            "title":"Reservas por commissões",
+            "title":"Reservas por comissões",
             "header": {
                 "number": "Número",
                 "name": "Nome",
@@ -46,7 +46,7 @@
                 "item": "Item",
                 "value": "Valor",
                 "calc": "Calc",
-                "commission": "Commissão",
+                "commission": "Comissão",
                 "owner": "Propritário"
             },
             "bookings":{
@@ -59,6 +59,10 @@
                 "valueSum": "R$ {{value}}",
                 "commissionSum": "R$ {{value}}",
                 "ownerSum": "R$ {{value}}"
+            },
+            "totalCommission": {
+                "commission": "R$ {{value}}",
+                "owner": "R$ {{value}}"
             }
         }
     }
