@@ -64,6 +64,55 @@
                 "commission": "R$ {{value}}",
                 "owner": "R$ {{value}}"
             }
+        },
+        "fees": {
+            "title": "Taxas",
+            "titleTable": "Taxa",
+            "cleaningFees": "Taxas de Limpeza",
+            "cleaningFeesValue": "R$ {{value}}",
+            "bedLinenFees": "Taxas de roupa de cama",
+            "bedLinenFeesValeu": "R$ {{value}}",
+            "serviceCharge": "Taxa de Serviço",
+            "serviceChargeValue": "R$ {{value}}",
+            "utilityLinenFees": "Taxas de roupa de Utility",
+            "utilityLinenFeesValue": "$ {{value}}",
+            "otherFees": "Taxas Outras",
+            "otherFeesValue": "R$ {{value}}",
+            "totalValueInDailyRates": "Valor Total em Diárias",
+            "totalValueInDailyRatesValue": "R$ {{value}}",
+            "totalValueInFees": "Valor Total em Taxas",
+            "totalValueInFeesValue": "R$ {{value}}",
+            "totalValue": "Valor Total",
+            "totalValueValue": "R$ {{value}}"
+
+        },
+        "expensesAndAdjustments": {
+            "title": "Despesas e ajustes",
+            "total": "Total",
+            "admValue": "R$ {{value}}",
+            "propValue": "R$ {{value}}",
+            "header": {
+                "expenses": "Despesas",
+                "maturity": "Vencimento",
+                "admValue": "Valor Adm",
+                "propValue": "Valor Prop"
+            }
+        },
+        "totais": {
+            "title": "Totais",
+            "totalAdministratorInCommissions": "Total de Administrador em comissões",
+            "totalAdministratorInCommissionsValue": "R$ {{value}}",
+            "administratorDeductions": "Deduções Administrador",
+            "administratorDeductionsValue": "R$ {{value}}",
+            "totalOwnershipInTransfers": "Total Proprietário em Repasses",
+            "totalOwnershipInTransfersValue": "R$ {{value}}",
+            "homeownerDeductions": "Deduções Proprietário",
+            "homeownerDeductionsValue": "R$ {{value}}",
+            "ownerSubtotal": "Subtotal Proprietário",
+            "ownerSubtotalValue": "R$ {{value}}",
+            "administratorSubtotal": "Subtotal Administrador",
+            "administratorSubtotalValue": "R$ {{value}}"
+
         }
     }
 }

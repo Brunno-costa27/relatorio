@@ -34,7 +34,7 @@ export function Table({t, language}){
 
     const reservas_canal = [
 
-        { categoria: 'Airbnb', valor: '3', subvalor: 'R$ 1.127,52' },
+        { categoria: 'Airbnb', valor: '3', subvalor: "1.127.52" },
         
       ];
       
@@ -659,13 +659,13 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Taxas */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-10 sm:text-4xl">Taxas</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-10 sm:text-4xl">{t('fees.title')}</h1>
 
     <table className="w-full flex flex-col justify-between  table-auto px-10">
             <thead className="">
                 <tr className="flex justify-between px-4">
-                <th className="flex text-left  text-black py-4 ">Taxa</th>
-                <th className="flex text-left  text-black py-4 ">Valor Total</th>
+                <th className="flex text-left  text-black py-4 ">{t('fees.titleTable')}</th>
+                <th className="flex text-left  text-black py-4 ">{t('fees.totalValue')}</th>
                 </tr>
             </thead>
         <tbody className="text-sm sm:text-base">
@@ -674,56 +674,70 @@ var graficOrigensCommission = chart2.getUrl()
             <tr className="flex">
             <td className="w-full text-left border-y border-black px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Taxas de Limpeza</div>
-                <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.CLEANING_FEE)}</div>
+                <div className=" text-gray-800">{t('fees.cleaningFees')}</div>
+                <div className="text-black font-bold">{t('fees.cleaningFeesValue', {
+                  value: formatNumber(resumo[0].taxBreakDown.CLEANING_FEE)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="text-black-800">Taxas de roupa de cama</div>
-                <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.LINEN_FEE)}</div>
+                <div className="text-black-800">{t('fees.bedLinenFees')}</div>
+                <div className="text-black font-bold">{t('fees.bedLinenFeesValeu', {
+                  value: formatNumber(resumo[0].taxBreakDown.LINEN_FEE)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Taxa de serviço</div>
-                <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)}</div>
+                <div className=" text-gray-800">{t('fees.serviceCharge')}</div>
+                <div className="text-black font-bold">{t('fees.serviceChargeValue', {
+                  value: formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Taxas de roupa de Utility</div>
-                <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)}</div>
+                <div className=" text-gray-800">{t('fees.utilityLinenFees')}</div>
+                <div className="text-black font-bold">{t('fees.utilityLinenFeesValue', {
+                  value: formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Taxas Outras</div>
-                <div className="text-black font-bold">R$ {formatNumber(resumo[0].taxBreakDown.OTHER_FEE)}</div>
+                <div className=" text-gray-800">{t('fees.otherFees')}</div>
+                <div className="text-black font-bold">{t('fees.otherFeesValue', {
+                  value: formatNumber(resumo[0].taxBreakDown.OTHER_FEE)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Valor Total em Diárias</div>
-                <div className="text-black font-bold">R$ --</div>
+                <div className=" text-gray-800">{t('fees.totalValueInDailyRates')}</div>
+                <div className="text-black font-bold">{t('fees.totalValueInDailyRatesValue', {
+                  value: 0
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-gray-800">Valor Total em Taxas</div>
-                <div className="text-black font-bold">R$ 627,00</div>
+                <div className=" text-gray-800">{t('fees.totalValueInFees')}</div>
+                <div className="text-black font-bold">{t('fees.totalValueInFeesValue', {
+                  value: 0
+                })}</div>
                 </div>
             </td>
             </tr>
@@ -731,8 +745,10 @@ var graficOrigensCommission = chart2.getUrl()
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black font-bold">Total</div>
-                <div className="text-black font-bold">R$ 627,00</div>
+                <div className=" text-black font-bold">{t('fees.totalValue')}</div>
+                <div className="text-black font-bold">{t('fees.totalValueValue', {
+                  value: 0
+                })}</div>
                 </div>
             </td>
             </tr>
@@ -744,25 +760,29 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Despesas e ajustes */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black p-10 sm:text-4xl">Despesas e ajustes</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black p-10 sm:text-4xl">{t('expensesAndAdjustments.title')}</h1>
 
     <table className="w-full flex flex-col table-auto px-10">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
-          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">Despesas</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Vencimento</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Valor Adm</th>
-          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">Valor Prop.</th>
+          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('expensesAndAdjustments.header.expenses')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('expensesAndAdjustments.header.maturity')}</th>
+          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('expensesAndAdjustments.header.admValue')}</th>
+          <th className="w-full text-right font-bold text-black border-y border-black  px-4 py-2">{t('expensesAndAdjustments.header.propValue')}</th>
 
         </tr>
       </thead>
       <tbody className="text-sm sm:text-base">
         {reservas_canal.map((item) => (
           <tr className="w-full flex text-center" key={item.categoria}>
-            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">Total</td>
+            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.total')}</td>
             <td className="w-full  text-left border-y border-black px-4 py-4 border-t-0  font-bold"></td>
-            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{item.subvalor}</td>
-            <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{item.subvalor}</td>
+            <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.admValue', {
+              value: item.subvalor
+            })}</td>
+            <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{t('expensesAndAdjustments.propValue', {
+              value: item.subvalor
+            })}</td>
           </tr>
         ))}
       </tbody>
@@ -774,7 +794,7 @@ var graficOrigensCommission = chart2.getUrl()
     <table className="w-full flex flex-col table-auto p-10">
             <thead>
                 <tr>
-                <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">Totais</th>
+                <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">{t('totais.title')}</th>
                 </tr>
             </thead>
         <tbody className="text-sm sm:text-base">
@@ -783,48 +803,60 @@ var graficOrigensCommission = chart2.getUrl()
             <tr className="flex">
             <td className="w-full text-left border-y border-black  px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black">Total de Administrador em comissões</div>
-                <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>
+                <div className=" text-black">{t('totais.totalAdministratorInCommissions')}</div>
+                <div className="text-black">{t('totais.totalAdministratorInCommissionsValue', {
+                  value: formatNumber(item.comissions.adminValue)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className="text-black">Deduções Administrador</div>
-                <div className="text-black">R$ --</div>
+                <div className="text-black">{t('totais.administratorDeductions')}</div>
+                <div className="text-black">{t('totais.administratorDeductionsValue', {
+                  value: 0
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black">Total Proprietário em Repasses</div>
-                <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
+                <div className=" text-black">{t('totais.totalOwnershipInTransfers')}</div>
+                <div className="text-black">{t('totais.totalOwnershipInTransfersValue', {
+                  value: formatNumber(item.comissions.ownerValue)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black">Deduções Proprietário</div>
-                <div className="text-black">R$ 285,86</div>
+                <div className=" text-black">{t('totais.homeownerDeductions')}</div>
+                <div className="text-black">{t('totais.homeownerDeductionsValue', {
+                  value: 0
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black font-bold">Subtotal Proprietário</div>
-                <div className="text-black">R$ {formatNumber(item.comissions.ownerValue)}</div>
+                <div className=" text-black font-bold">{t('totais.ownerSubtotal')}</div>
+                <div className="text-black">{t('totais.ownerSubtotalValue', {
+                  value: formatNumber(item.comissions.ownerValue)
+                })}</div>
                 </div>
             </td>
             </tr>
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
-                <div className=" text-black font-bold">Subtotal Administrador</div>
-                <div className="text-black">R$ {formatNumber(item.comissions.adminValue)}</div>
+                <div className=" text-black font-bold">{t('totais.administratorSubtotal')}</div>
+                <div className="text-black">{t('totais.administratorSubtotalValue', {
+                  value: formatNumber(item.comissions.adminValue)
+                })}</div>
                 </div>
             </td>
             </tr>

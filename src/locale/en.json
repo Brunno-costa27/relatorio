@@ -69,6 +69,55 @@
             }
 
 
+        },
+        "fees": {
+            "title": "Fees",
+            "titleTable": "Fees",
+            "cleaningFees": "Cleaning Fees",
+            "cleaningFeesValue": "$ {{value}}",
+            "bedLinenFees": "Bed Linen Fees",
+            "bedLinenFeesValeu": "$ {{value}}",
+            "serviceCharge": "Service Charge",
+            "serviceChargeValue": "$ {{value}}",
+            "utilityLinenFees": "Utility Linen Fees",
+            "utilityLinenFeesValue": "$ {{value}}",
+            "otherFees": "Other Fees",
+            "otherFeesValue": "$ {{value}}",
+            "totalValueInDailyRates": "Total Value In Daily Rates",
+            "totalValueInDailyRatesValue": "$ {{value}}",
+            "totalValueInFees": "Total Value in Fees",
+            "totalValueInFeesValue": "$ {{value}}",
+            "totalValue": "Total Value",
+            "totalValueValue": "$ {{value}}"
+
+        },
+        "expensesAndAdjustments": {
+            "title": "Expenses And Adjustments",
+            "total": "Totals",
+            "admValue": "$ {{value}}",
+            "propValue": "$ {{value}}",
+            "header": {
+                "expenses": "Expenses",
+                "maturity": "Maturity",
+                "admValue": "Adm Value",
+                "propValue": "Prop Value"
+            }
+        },
+        "totais": {
+            "title": "Totals",
+            "totalAdministratorInCommissions": "Total Administrator in commissions",
+            "totalAdministratorInCommissionsValue": "$ {{value}}",
+            "administratorDeductions": "Administrator Deductions",
+            "administratorDeductionsValue": "$ {{value}}",
+            "totalOwnershipInTransfers": "Total Ownership in Transfers",
+            "totalOwnershipInTransfersValue": "$ {{value}}",
+            "homeownerDeductions": "Homeowner Deductions",
+            "homeownerDeductionsValue": "$ {{value}}",
+            "ownerSubtotal": "Owner Subtotal",
+            "ownerSubtotalValue": "$ {{value}}",
+            "administratorSubtotal": "Administrator Subtotal",
+            "administratorSubtotalValue": "$ {{value}}"
+
         }
     }
 }
