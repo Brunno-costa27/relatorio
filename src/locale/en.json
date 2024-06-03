@@ -83,10 +83,6 @@
             "utilityLinenFeesValue": "$ {{value}}",
             "otherFees": "Other Fees",
             "otherFeesValue": "$ {{value}}",
-            "totalValueInDailyRates": "Total Value In Daily Rates",
-            "totalValueInDailyRatesValue": "$ {{value}}",
-            "totalValueInFees": "Total Value in Fees",
-            "totalValueInFeesValue": "$ {{value}}",
             "totalValue": "Total Value",
             "totalValueValue": "$ {{value}}"
 

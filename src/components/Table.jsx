@@ -40,233 +40,214 @@ export function Table({t, language}){
       
       canal_de_reservas[0].Cancelado = resumo[0].statusCount.canceled
 
-    // calcular a largura da tela
-    // const viewportWidth = window.innerWidth;
-    // console.log(viewportWidth)
+      const  chart = new QuickChart();
 
+      chart.setWidth(400)
+      chart.setHeight(200);
+      chart.setVersion('2.9.4');
 
+      const exemplo = []
+      canal_de_reservas.forEach((item => {
+        var temp = Object.keys(item)
+          temp.forEach(item => {
 
-const  chart = new QuickChart();
+            exemplo.push(item)
+          })
+      }))
 
-chart.setWidth(400)
-chart.setHeight(200);
-chart.setVersion('2.9.4');
+      chart.setConfig({
+        type: 'doughnut',
+        data: {
+          // labels: Object.keys(canal_de_reservas[0]),
+          datasets: [
+            { 
+              data: [
+                canal_de_reservas[0].BookingCom.count, 
+                canal_de_reservas[0].Airbnb.count,
+                resumo[0].statusCount.canceled
+              ],
+              backgroundColor: ['green', '#3b82f6', '#eee'],       
+            }
+          ],
+        },
+        options: {
+          plugins: {
+            doughnutlabel: {
+              labels: [
+                { 
+                  text: resumo[0].bookingCount, 
+                  font: { size: 20 },
+                  color: 'black'
+                }, 
+                { 
+                  text: 'Total', 
+                  font: { size: 10},
+                  color: 'black',
+                  
+                },
+            ],
+            },
+            datalabels: {
+              color: function (context) {
+                if (context.datasetIndex === 0) {
+                  // // Texto branco para barras com fundo verde.
+                  return context.dataset.backgroundColor[context.dataIndex] ===
+                    'green'
+                    ? '#fff'
+                    : '#000';
+                }
+              },
+            }
+          },
+        },
+      });
 
-const exemplo = []
-canal_de_reservas.forEach((item => {
-  var temp = Object.keys(item)
-    temp.forEach(item => {
+      var graficOrigens = chart.getUrl() 
 
-      exemplo.push(item)
-    })
-}))
+      // Essa parte não funciona
+      // // Get the graficOrigens...
+      // const async graficOrigens = await chart.toBinary();
 
-chart.setConfig({
-  type: 'doughnut',
-  data: {
-    // labels: Object.keys(canal_de_reservas[0]),
-    datasets: [
-      { 
-        data: [
-          canal_de_reservas[0].BookingCom.count, 
-          canal_de_reservas[0].Airbnb.count,
-          resumo[0].statusCount.canceled
-        ],
-        backgroundColor: ['green', '#3b82f6', '#eee'],       
-      }
-    ],
-  },
-  options: {
-    plugins: {
-      doughnutlabel: {
-        labels: [
-          { 
-            text: resumo[0].bookingCount, 
-            font: { size: 20 },
-            color: 'black'
-          }, 
-          { 
-            text: 'Total', 
-            font: { size: 10},
-            color: 'black',
+      // // Or write it to a file
+      // chart.toFile('chart.png');
+    
+    
+      const chart1 = new QuickChart();
+
+      chart1.setWidth(500)
+      chart1.setHeight(300);
+      chart1.setVersion('2.9.4');
+
+      chart1.setConfig({
+        type: 'doughnut',
+        data: {
+          datasets: [
+            {
+              data: [
+                ((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0),
+                100-((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0)
+              ],
+              backgroundColor: ['green', '#eee'],
+              label: 'Dataset 1',
+              borderWidth: 0,
+            },
+          ],
+          labels: ['A', 'C'],
+        },
+        options: {
+          circumference: Math.PI,
+          rotation: Math.PI,
+          cutoutPercentage: 75,
+          layout: {
+            padding: 60,
             
           },
-      ],
-      },
-      datalabels: {
-        color: function (context) {
-          if (context.datasetIndex === 0) {
-            // // Texto branco para barras com fundo verde.
-            return context.dataset.backgroundColor[context.dataIndex] ===
-              'green'
-              ? '#fff'
-              : '#000';
-          }
-        },
-      }
-    },
-  },
-});
-
-var graficOrigens = chart.getUrl() 
-
-// Essa parte não funciona
-// // Get the graficOrigens...
-// const async graficOrigens = await chart.toBinary();
-
-// // Or write it to a file
-// chart.toFile('chart.png');
-    
-    
-const chart1 = new QuickChart();
-
-chart1.setWidth(500)
-chart1.setHeight(300);
-chart1.setVersion('2.9.4');
-
-chart1.setConfig({
-  type: 'doughnut',
-  data: {
-    datasets: [
-      {
-        data: [
-          ((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0),
-          100-((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0)
-        ],
-        backgroundColor: ['green', '#eee'],
-        label: 'Dataset 1',
-        borderWidth: 0,
-      },
-    ],
-    labels: ['A', 'C'],
-  },
-  options: {
-    circumference: Math.PI,
-    rotation: Math.PI,
-    cutoutPercentage: 75,
-    layout: {
-      padding: 60,
-      
-    },
-    legend: {
-      display: false,
-    },
-    plugins: {
-      datalabels: {
-        color: '#404040',
-        anchor: 'end',
-        align: 'end',
-        formatter: (val) => val + '%',
-        font: {
-          size: 25,
-          weight: 'bold',
-        },
-      },
-      doughnutlabel: {
-        labels: [
-          {
-            text: '\nTaxa de',
-            font: {
-              size: 20,
+          legend: {
+            display: false,
+          },
+          plugins: {
+            datalabels: {
+              color: '#404040',
+              anchor: 'end',
+              align: 'end',
+              formatter: (val) => val + '%',
+              font: {
+                size: 25,
+                weight: 'bold',
+              },
+            },
+            doughnutlabel: {
+              labels: [
+                {
+                  text: '\nTaxa de',
+                  font: {
+                    size: 20,
+                  },
+                },
+                {
+                  text: '\nocupação',
+                  color: '#000',
+                  font: {
+                    size: 25,
+                    weight: 'bold',
+                  },
+                },
+              ],
             },
           },
-          {
-            text: '\nocupação',
-            color: '#000',
-            font: {
-              size: 25,
-              weight: 'bold',
-            },
-          },
-        ],
-      },
-    },
-  },
-});
-
-
-const graficSummary = chart1.getUrl();
-
-// Essa parte não funciona
-// Get the image...
-// const image = await chart.toBinary();
-
-// Or write it to a file
-// chart.toFile('chart.png');
-
-console.log(formattedStatusCounts);
-const  chart2 = new QuickChart();
-
-chart2.setWidth(400)
-chart2.setHeight(200);
-chart2.setVersion('2.9.4');
-
-chart2.setConfig({
-  type: 'doughnut',
-  data: {
-    datasets: [
-      { 
-        data: [
-          formattedStatusCounts[2].confirmed,
-          formattedStatusCounts[0].inConfirmation,
-          formattedStatusCounts[1].cancelled,
-        ],
-        backgroundColor: ['green', '#3b82f6', '#eee'],   
-      }
-    ],
-  },
-  options: {
-    plugins: {
-      doughnutlabel: {
-        
-        labels: [
-          { 
-            text: resumo[0].bookingCount, 
-            font: { size: 20 },
-            color: 'black'
-          }, 
-          { 
-            text: 'Total', 
-            font: { size: 10},
-            color: 'black',
-          },
-        ],
-      },
-      datalabels: {
-        color: function (context) {
-          if (context.datasetIndex === 0) {
-            // // Texto branco para barras com fundo verde.
-            return context.dataset.backgroundColor[context.dataIndex] ===
-              'green'
-              ? '#fff'
-              : '#000';
-          }
         },
-      }
-    },
-  },
-});
-
-var graficOrigensCommission = chart2.getUrl() 
+      });
 
 
-// // TRADUÇÃO
-//     const { t, i18n: { changeLanguage, language}, } = useTranslation()
+      const graficSummary = chart1.getUrl();
 
-//     const [currentLanguage, setCurrentLanguage] = useState(language)
+      // Essa parte não funciona
+      // Get the image...
+      // const image = await chart.toBinary();
 
+      // Or write it to a file
+      // chart.toFile('chart.png');
 
-//     function handleChangeLanguage(){
-//         const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
-        
-//         changeLanguage(newLanguage)
-//         setCurrentLanguage(newLanguage)
-//     }
+      console.log(formattedStatusCounts);
+      const  chart2 = new QuickChart();
+
+      chart2.setWidth(400)
+      chart2.setHeight(200);
+      chart2.setVersion('2.9.4');
+
+      chart2.setConfig({
+        type: 'doughnut',
+        data: {
+          datasets: [
+            { 
+              data: [
+                formattedStatusCounts[2].confirmed,
+                formattedStatusCounts[0].inConfirmation,
+                formattedStatusCounts[1].cancelled,
+              ],
+              backgroundColor: ['green', '#3b82f6', '#eee'],   
+            }
+          ],
+        },
+        options: {
+          plugins: {
+            doughnutlabel: {
+              
+              labels: [
+                { 
+                  text: resumo[0].bookingCount, 
+                  font: { size: 20 },
+                  color: 'black'
+                }, 
+                { 
+                  text: 'Total', 
+                  font: { size: 10},
+                  color: 'black',
+                },
+              ],
+            },
+            datalabels: {
+              color: function (context) {
+                if (context.datasetIndex === 0) {
+                  // // Texto branco para barras com fundo verde.
+                  return context.dataset.backgroundColor[context.dataIndex] ===
+                    'green'
+                    ? '#fff'
+                    : '#000';
+                }
+              },
+            }
+          },
+        },
+      });
+
+      var graficOrigensCommission = chart2.getUrl() 
+
 
     return(
 
         <>
-        <table className="w-full font-sans flex flex-col table-auto p-10 ">
+        <table className="w-full font-sans flex flex-col table-auto p-8 ">
             <thead>
                 <tr>
                 <th className="text-lg sm:text-left  font-normal text-black py-4 sm:text-4xl">{t('summary.summary')}</th>
@@ -343,7 +324,7 @@ var graficOrigensCommission = chart2.getUrl()
 
           {/* GRÁFICO */}
 
-          <div className="w-full flex justify-between p-10">
+          <div className="w-full flex justify-between p-8">
             <div className="w-1/3 flex flex-col justify-center items-center">
                   
             <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
@@ -378,9 +359,9 @@ var graficOrigensCommission = chart2.getUrl()
     {/* Reservas por canal */}
 
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-10 sm:text-4xl">{t('ReservationsByChannel.title')}</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-8 sm:text-4xl">{t('ReservationsByChannel.title')}</h1>
 
-    <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-10 ">
+    <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-8 ">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('ReservationsByChannel.table.channel')}</th>
@@ -418,7 +399,7 @@ var graficOrigensCommission = chart2.getUrl()
     </table>
 
     {/* Gráfico de reservas de canal */}
-        <div className="w-full flex justify-between p-10">
+        <div className="w-full flex justify-between p-8">
             <div className="w-1/3 flex flex-col justify-center items-center">
               {exemplo.map((item => 
 
@@ -458,7 +439,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     <h1 className="text-lg sm:text-left font-normal text-black py-10 px-10 sm:text-4xl">{t('commissionBookings.title')}</h1>
 
-    <table className="w-full flex flex-col table-auto px-10">
+    <table className="w-full flex flex-col table-auto px-8">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('commissionBookings.header.number')}</th>
@@ -517,9 +498,9 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">Limp.</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ </td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">{item.values.taxBreakDown.CLEANING_FEE}</td>
                   <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">100%</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">{item.values.comissions.comissions.CLEANING_FEE}</td>
                   <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">R$ 0,00</td>
                 </tr>
 
@@ -531,7 +512,7 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black  px-4 py-4">Serv.</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black px-4 py-4">{item.values.taxBreakDown.SERVICE_FEE}</td>
                   <td className="w-full text-left border-y border-black px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
                   <td className="w-full text-left border-y border-black px-4 py-4">R$ 0,00</td>
@@ -545,7 +526,7 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Util.</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.values.taxBreakDown.LINEN_FEE}</td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
@@ -559,7 +540,7 @@ var graficOrigensCommission = chart2.getUrl()
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full border-none text-left px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Outras</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.values.taxBreakDown.OTHER_FEE}</td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
                   <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">R$ 0,00</td>
@@ -592,7 +573,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* total */}
 
-                      <table className="flex flex-col px-10">
+                      <table className="flex flex-col px-8">
                             <tbody className="text-sm sm:text-base">
                             <tr className="w-full flex text-center" >
                               <td className="w-full text-left font-bold border-b-0 border-y border-black px-4 py-4">Total</td>
@@ -617,7 +598,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* GRÁFICO */}
 
-    <div className="w-full flex justify-between p-10">
+    <div className="w-full flex justify-between p-8">
             <div className="w-1/3 flex flex-col justify-center items-center">
               {formattedStatusCounts.map((item => 
 
@@ -659,7 +640,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Taxas */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-10 sm:text-4xl">{t('fees.title')}</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-8 sm:text-4xl">{t('fees.title')}</h1>
 
     <table className="w-full flex flex-col justify-between  table-auto px-10">
             <thead className="">
@@ -721,33 +702,15 @@ var graficOrigensCommission = chart2.getUrl()
                 </div>
             </td>
             </tr>
-            <tr className="flex">
-            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
-                <div className="flex justify-between">
-                <div className=" text-gray-800">{t('fees.totalValueInDailyRates')}</div>
-                <div className="text-black font-bold">{t('fees.totalValueInDailyRatesValue', {
-                  value: 0
-                })}</div>
-                </div>
-            </td>
-            </tr>
-            <tr className="flex">
-            <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
-                <div className="flex justify-between">
-                <div className=" text-gray-800">{t('fees.totalValueInFees')}</div>
-                <div className="text-black font-bold">{t('fees.totalValueInFeesValue', {
-                  value: 0
-                })}</div>
-                </div>
-            </td>
-            </tr>
+            
+           
 
             <tr className="flex">
             <td className="w-full text-left border-y border-black border-t-0 px-4 py-2">
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">{t('fees.totalValue')}</div>
                 <div className="text-black font-bold">{t('fees.totalValueValue', {
-                  value: 0
+                  value: formatNumber(resumo[0].taxTotal)
                 })}</div>
                 </div>
             </td>
@@ -760,7 +723,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Despesas e ajustes */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black p-10 sm:text-4xl">{t('expensesAndAdjustments.title')}</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black p-8 sm:text-4xl">{t('expensesAndAdjustments.title')}</h1>
 
     <table className="w-full flex flex-col table-auto px-10">
       <thead  className="flex text-center">
@@ -773,15 +736,15 @@ var graficOrigensCommission = chart2.getUrl()
         </tr>
       </thead>
       <tbody className="text-sm sm:text-base">
-        {reservas_canal.map((item) => (
+        {resumo.map((item) => (
           <tr className="w-full flex text-center" key={item.categoria}>
             <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.total')}</td>
             <td className="w-full  text-left border-y border-black px-4 py-4 border-t-0  font-bold"></td>
             <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.admValue', {
-              value: item.subvalor
+              value: formatNumber(item.comissions.adminValue)
             })}</td>
             <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{t('expensesAndAdjustments.propValue', {
-              value: item.subvalor
+              value: formatNumber(item.comissions.ownerValue)
             })}</td>
           </tr>
         ))}
@@ -791,7 +754,7 @@ var graficOrigensCommission = chart2.getUrl()
 
     {/* Totais */}
 
-    <table className="w-full flex flex-col table-auto p-10">
+    <table className="w-full flex flex-col table-auto p-8">
             <thead>
                 <tr>
                 <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">{t('totais.title')}</th>
@@ -815,7 +778,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <div className="flex justify-between">
                 <div className="text-black">{t('totais.administratorDeductions')}</div>
                 <div className="text-black">{t('totais.administratorDeductionsValue', {
-                  value: 0
+                  value: formatNumber(item.comissions.adminValue)
                 })}</div>
                 </div>
             </td>
@@ -835,7 +798,7 @@ var graficOrigensCommission = chart2.getUrl()
                 <div className="flex justify-between">
                 <div className=" text-black">{t('totais.homeownerDeductions')}</div>
                 <div className="text-black">{t('totais.homeownerDeductionsValue', {
-                  value: 0
+                  value: formatNumber(item.comissions.ownerValue)
                 })}</div>
                 </div>
             </td>

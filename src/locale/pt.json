@@ -74,14 +74,10 @@
             "bedLinenFeesValeu": "R$ {{value}}",
             "serviceCharge": "Taxa de Serviço",
             "serviceChargeValue": "R$ {{value}}",
-            "utilityLinenFees": "Taxas de roupa de Utility",
-            "utilityLinenFeesValue": "$ {{value}}",
+            "utilityLinenFees": "Taxas de roupa de Utility(Água e Luz)",
+            "utilityLinenFeesValue": "R$ {{value}}",
             "otherFees": "Taxas Outras",
             "otherFeesValue": "R$ {{value}}",
-            "totalValueInDailyRates": "Valor Total em Diárias",
-            "totalValueInDailyRatesValue": "R$ {{value}}",
-            "totalValueInFees": "Valor Total em Taxas",
-            "totalValueInFeesValue": "R$ {{value}}",
             "totalValue": "Valor Total",
             "totalValueValue": "R$ {{value}}"
 

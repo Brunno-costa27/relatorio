@@ -1,0 +1,119 @@
+{
+    "translation": {
+      "header": {
+        "property": "Propriété",
+        "period": "Période",
+        "method": "Méthode"
+      },
+      "summary": {
+        "summary": "Résumé",
+        "occupation": "Occupation",
+        "totalReservations": "Nombre total de réservations",
+        "averageStay": "Durée moyenne du séjour",
+        "averageDailyRate": "Tarif journalier moyen",     
+        "averageDailyRateValue": "€ {{value}}",
+        "canceledReservations": "Réservations annulées",
+        "totalValueInDailyRates": "Valeur totale en tarifs journaliers",
+        "totalValueInDailyRatesValue": "€ {{value}}",
+        "totalValueInFees": "Valeur totale des frais",
+        "totalValueInFeesValue": "€ {{value}}",
+        "graphic": {
+          "occupation": "Occupation",
+          "canceled": "Annulées"
+        }
+      },
+      "ReservationsByChannel": {
+        "title": "Réservations par canal",
+        "table": {
+          "channel": "Canal",
+          "salesValue": "Valeur des ventes",
+          "bookingCom": "€ {{value}}",
+          "airbnb": "€ {{value}}",
+          "cancel": "Annuler"
+        }
+      },
+      "commissionBookings": {
+        "title": "Réservations commissionnées",
+        "header": {
+          "number": "Numéro",
+          "name": "Nom",
+          "channel": "Canal",
+          "in": "Entrée",
+          "oct": "Sortie",
+          "status": "État",
+          "item": "Élément",
+          "value": "Valeur",
+          "calc": "Calcul",
+          "commission": "Commission",
+          "owner": "Propriétaire"
+        },
+        "bookings": {
+          "daily": "Journalier",
+          "valueCommission": "€ {{value}}",
+          "commission": "€ {{value}}",
+          "owner": "€ {{value}}"
+        },
+        "total": {
+          "valueSum": "€ {{value}}",
+          "commissionSum": "€ {{value}}",
+          "ownerSum": "€ {{value}}"
+        },
+        "totalCommission": {
+          "commission": "€ {{value}}",
+          "owner": "€ {{value}}"
+        },
+        "ghapic": {
+          "inConfirmation": "En confirmation",
+          "canceled": "Annulé",
+          "confirmed": "Confirmé"
+        }
+      },
+      "fees": {
+        "title": "Frais",
+        "titleTable": "Frais",
+        "cleaningFees": "Frais de nettoyage",
+        "cleaningFeesValue": "€ {{value}}",
+        "bedLinenFees": "Frais de linge de lit",
+        "bedLinenFeesValeu": "€ {{value}}",
+        "serviceCharge": "Frais de service",
+        "serviceChargeValue": "€ {{value}}",
+        "utilityLinenFees": "Frais de linge utilitaire",
+        "utilityLinenFeesValue": "€ {{value}}",
+        "otherFees": "Autres frais",
+        "otherFeesValue": "€ {{value}}",
+        "totalValueInDailyRates": "Valeur totale en tarifs journaliers",
+        "totalValueInDailyRatesValue": "€ {{value}}",
+        "totalValueInFees": "Valeur totale des frais",
+        "totalValueInFeesValue": "€ {{value}}",
+        "totalValue": "Valeur totale",
+        "totalValueValue": "€ {{value}}"
+      },
+      "expensesAndAdjustments": {
+        "title": "Dépenses et ajustements",
+        "total": "Totaux",
+        "admValue": "€ {{value}}",
+        "propValue": "€ {{value}}",
+        "header": {
+          "expenses": "Dépenses",
+          "maturity": "Échéance",
+          "admValue": "Valeur adm",
+          "propValue": "Valeur prop"
+        }
+      },
+      "totais": {
+        "title": "Totaux",
+        "totalAdministratorInCommissions": "Total de l'administrateur en commissions",
+        "totalAdministratorInCommissionsValue": "€ {{value}}",
+        "administratorDeductions": "Dédu",
+        "administratorDeductionsValue": "€ {{value}}", 
+        "totalOwnershipInTransfers": "Total des Propriétaires en transferts",
+        "totalOwnershipInTransfersValue": "€ {{value}}",  
+        "homeownerDeductions": "Déductions Propriétaire", 
+        "homeownerDeductionsValue": "€ {{value}}", 
+        "ownerSubtotal": "Sous-total Propriétaire",
+        "ownerSubtotalValue": "€ {{value}}",  
+        "administratorSubtotal": "Sous-total Administrateur",
+        "administratorSubtotalValue": "€ {{value}}" 
+    }
+}
+}

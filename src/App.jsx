@@ -12,7 +12,7 @@ function App() {
 
 
     function handleChangeLanguage(){
-        const newLanguage = currentLanguage === 'en' ? 'pt' : 'en'
+        const newLanguage = currentLanguage === 'en' ? 'pt' : 'en' 
         
         changeLanguage(newLanguage)
         setCurrentLanguage(newLanguage)
