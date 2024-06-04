@@ -63,6 +63,28 @@
             "totalCommission": {
                 "commission": "R$ {{value}}",
                 "owner": "R$ {{value}}"
+            },
+            "expenses": {
+                "cleaning": {
+                    "value": "R$ {{value}}",
+                    "commission":"R$ {{value}}",
+                    "prop": "R$"
+                },
+                "services": {
+                    "value": "R$ {{value}}",
+                    "commission":"R$ {{value}}",
+                    "prop": "R$"
+                },
+                "utility": {
+                    "value": "R$ {{value}}",
+                    "commission":"R$ {{value}}",
+                    "prop": "R$"
+                },
+                "others": {
+                    "value": "R$ {{value}}",
+                    "commission":"R$ {{value}}",
+                    "prop": "R$"
+                }
             }
         },
         "fees": {

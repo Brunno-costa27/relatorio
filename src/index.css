@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 
+@media print {
+    .print\:table-header {
+      display: table-header-group;
+    }
+  }
