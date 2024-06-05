@@ -675,7 +675,7 @@ export function Table({t, language}){
 
     {/* Taxas */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-5 sm:text-4xl">{t('fees.title')}</h1>
+    <h1 className="text-2xl  font-normal text-black">{t('fees.title')}</h1>
 
     <table className="w-full flex flex-col justify-between  table-auto">
             <thead className="">
@@ -758,7 +758,7 @@ export function Table({t, language}){
 
     {/* Despesas e ajustes */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black sm:text-4xl py-5">{t('expensesAndAdjustments.title')}</h1>
+    <h1 className="text-2xl font-normal text-black py-5">{t('expensesAndAdjustments.title')}</h1>
 
     <table className="w-full flex flex-col table-auto">
       <thead  className="flex text-center">
@@ -770,7 +770,7 @@ export function Table({t, language}){
 
         </tr>
       </thead>
-      <tbody className="text-sm sm:text-base">
+      <tbody className="text-sm">
         {resumo.map((item) => (
           <tr className="w-full flex text-center" key={item.categoria}>
             <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.total')}</td>
@@ -792,10 +792,10 @@ export function Table({t, language}){
     <table className="w-full flex flex-col table-auto">
             <thead>
                 <tr>
-                <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">{t('totais.title')}</th>
+                <th className="text-2xl  font-normal text-black py-4 ">{t('totais.title')}</th>
                 </tr>
             </thead>
-        <tbody className="text-sm sm:text-base">
+        <tbody className="text-sm">
             {resumo.map((item) => (
                 <>
             <tr className="flex">
