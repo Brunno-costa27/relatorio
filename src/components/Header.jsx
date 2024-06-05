@@ -18,15 +18,15 @@ export function Header({t, language}){
 
     return(
         <>                       
-            <header  className="font-sans w-full flex flex-col px-8 gap-3 ">
+            <header  className="font-sans w-full flex flex-col gap-3 pb-5">
 
                 <div  className="w-full flex justify-between">
-                    <div className="hidden sm:flex flex-col gap-3">
-                        <img className="w-32 rounded-full" src={logo} alt="" />
+                    <div className="flex-col gap-3">
+                        <img className="w-14 rounded-full" src={logo} alt="" />
                     </div>
                     {header.map((item) => (
                     <>
-                    <div  className="text-sm sm:flex flex-col justify-center gap-2 font-bold sm:text-base">
+                    <div  className="flex-col justify-center gap-2 font-bold text-xs">
                         <p>Renti Aqui</p>
                         <p>{t('header.property')}: {item.name}</p>
                         <p>{t('header.period')}: 30/03/2024 a 26/04/2024 </p>

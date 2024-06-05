@@ -47,7 +47,7 @@
                 "value": "Valor",
                 "calc": "Calc",
                 "commission": "Comissão",
-                "owner": "Propritário"
+                "owner": "Prop"
             },
             "bookings":{
                 "daily": "Diárias",

@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 
-@media print {
+/* @media print {
     .print\:table-header {
       display: table-header-group;
+    }
+  } */
+
+
+  @media print {
+    @page {
+      size: A4; /* Defina o tamanho da página e orientação */
+    }
+  
+    body {
+      width: 100%;
+    }
+  
+    .print\:w-full {
+      width: 100%;
     }
   }

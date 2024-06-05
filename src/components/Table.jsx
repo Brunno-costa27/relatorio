@@ -6,14 +6,36 @@ import '../../src/index.css'
 // moment.locale('US')
 
 import QuickChart from "quickchart-js"
-import { TableHeader } from "./TableHeader.jsx";
+// import { TableHeader } from "./TableHeader.jsx";
 
 
 
 export function Table({t, language}){
 
 
+    // Função para truncar o nome do cliente
+    const truncateName = (name, maxLength) => {
+      if (name.length > maxLength) {
+        return name.substring(0, maxLength) + '...';
+      }
+      return name;
+    };
 
+    function separateWords(input) {
+      // Adicionar um espaço antes de cada letra maiúscula, exceto para a primeira letra
+      let result = input.replace(/([A-Z])/g, ' $1');
+    
+      // Transformar a primeira letra em maiúscula
+      result = result.charAt(0).toUpperCase() + result.slice(1);
+    
+      return result;
+    }
+
+    function formatNumberUSD(number) {
+      const numberString = number.toString();
+      console.log(numberString)
+      return numberString.replace(',', '.')
+    }
     const resumo = [
       data[0].bookings.summary
     ]
@@ -34,11 +56,6 @@ export function Table({t, language}){
       [status]: count,
     }));
 
-    const reservas_canal = [
-
-        { categoria: 'Airbnb', valor: '3', subvalor: "1.127.52" },
-        
-      ];
       
       canal_de_reservas[0].Cancelado = resumo[0].statusCount.canceled
 
@@ -249,18 +266,18 @@ export function Table({t, language}){
     return(
 
         <>
-        <table className="w-full font-sans flex flex-col table-auto p-8 ">
+        <table className="w-full font-sans flex flex-col table-auto">
             <thead>
                 <tr>
-                <th className="text-lg sm:text-left  font-normal text-black py-4 sm:text-4xl">{t('summary.summary')}</th>
+                <th className="text-2xl font-normal text-black py-2">{t('summary.summary')}</th>
                 </tr>
             </thead>
 
-            <tbody className="text-sm sm:text-base">
+            <tbody className="text-xs">
                 {resumo.map((item) => (
                     <>
                 <tr className="flex">
-                <td className="w-full text-left border-y text-black border-black px-4 py-2">
+                <td className="w-full text-left border-y text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.occupation')}</div>
                     <div className="text-black">{((item.bookingCount-item.cancelattionSummary.count)/item.bookingCount*100).toFixed(2)}%</div>
@@ -268,7 +285,7 @@ export function Table({t, language}){
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left  text-black border-black px-4 py-2">
+                <td className="w-full text-left  text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalReservations')}</div>
                     <div className="text-black">{item.bookingCount}</div>
@@ -276,7 +293,7 @@ export function Table({t, language}){
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left border-y text-black border-black px-4 py-2">
+                <td className="w-full text-left border-y text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.averageStay')}</div>
                     <div className="text-black">{item.avgLengthOfStayPerBooking.toFixed(2)}</div>
@@ -284,16 +301,16 @@ export function Table({t, language}){
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left  text-black border-black px-4 py-2">
+                <td className="w-full text-left  text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.averageDailyRate')}</div>
                     <div className="text-black">{t('summary.averageDailyRateValue', {
-                      value:  formatNumber(item.avgBookingValuePerDay)})}</div>
+                      value: language == 'en' ? formatNumberUSD(formatNumber(item.avgBookingValuePerDay)) : formatNumber(item.avgBookingValuePerDay)})}</div>
                     </div>
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left border-y text-black border-black px-4 py-2">
+                <td className="w-full text-left border-y text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.canceledReservations')}</div>
                     <div className="text-black">{item.cancelattionSummary.count}</div>
@@ -301,20 +318,20 @@ export function Table({t, language}){
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left  text-black border-black px-4 py-2">
+                <td className="w-full text-left  text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInDailyRates')}</div>
                     <div className="text-black">{t('summary.totalValueInDailyRatesValue', {
-                      value:  formatNumber(item.bookingValue)})}</div>
+                      value: language == 'en' ? formatNumberUSD(formatNumber(item.bookingValue)) : formatNumber(item.bookingValue)})}</div>
                     </div>
                 </td>
                 </tr>
                 <tr className="flex">
-                <td className="w-full text-left border-y text-black border-black px-4 py-2">
+                <td className="w-full text-left border-y text-black border-black px-2 py-2">
                     <div className="flex justify-between">
                     <div className="text-black">{t('summary.totalValueInFees')}</div>
                     <div className="text-black">{t('summary.totalValueInFeesValue', {
-                      value:  formatNumber(item.taxTotal)
+                      value: language == 'en' ? formatNumberUSD(formatNumber(item.taxTotal)) : formatNumber(item.taxTotal)
                     })}</div>
                     </div>
                 </td>
@@ -326,27 +343,27 @@ export function Table({t, language}){
 
           {/* GRÁFICO */}
 
-          <div className="w-full flex justify-between p-8">
+          <div className="w-full flex justify-between">
             <div className="w-1/3 flex flex-col justify-center items-center">
                   
-            <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
+            <div class="w-full flex items-center justify-between px-2 py-2 rounded-md text-black">
                 <div>
-                  <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">{t('summary.graphic.occupation')}</span>
+                  <span class="text-2xl font-normal mr-7 ">{t('summary.graphic.occupation')}</span>
                 </div>
                 <div>
-                  <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10  rounded-full">
+                  <svg className="w-7 h-7 rounded-full">
                     <rect x="0" y="0" width="100" height="100" fill="#15803d" />
                   </svg>
                 </div>
             </div>
 
-            <div class="w-full flex items-center justify-between px-4 py-2 rounded-md text-black">
+            <div class="w-full flex items-center justify-between px-2 py-2 rounded-md text-black">
               <div>
-                <span class="text-lg font-bold mr-7 md:text-4xl md:font-normal">{t('summary.graphic.canceled')}</span>
+                <span class="text-2xl font-normal mr-7">{t('summary.graphic.canceled')}</span>
               </div>
               <div>
-                <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10 rounded-full">
-                  <rect x="0" y="0" width="100" height="100" fill="#eee" />
+                <svg className="w-7 h-7 rounded-full">
+                  <rect x="0" y="0" width="90" height="90" fill="#eee" />
                 </svg>
               </div>
             </div>
@@ -361,10 +378,10 @@ export function Table({t, language}){
     {/* Reservas por canal */}
 
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-0 p-8 sm:text-4xl">{t('ReservationsByChannel.title')}</h1>
+    <h1 className="text-2xl font-normal text-black py-2">{t('ReservationsByChannel.title')}</h1>
 
-    <table className="table-fixed sm:w-full flex flex-col  sm:table-auto p-8 ">
-      <thead  className="flex text-center">
+    <table className="table-fixed  flex flex-col">
+      <thead  className="flex text-center text-sm">
         <tr className="w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('ReservationsByChannel.table.channel')}</th>
           <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">Qtd</th>
@@ -374,7 +391,7 @@ export function Table({t, language}){
         </tr>
       </thead>
 
-      <tbody className="text-sm sm:text-base">
+      <tbody className="text-xs">
         {canal_de_reservas.map((item) => (
           <>
           <tr className="w-full flex text-center">
@@ -382,7 +399,7 @@ export function Table({t, language}){
             <td className="w-full  text-left  border-black px-4 py-4">{item.BookingCom.count}</td>
             <td className="w-full text-left  border-black px-4 py-4">{item.BookingCom.cancelledCount}</td>
             <td className="w-full text-right  border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-              value: formatNumber(item.BookingCom.bookingValue)
+              value: language == 'en' ? formatNumberUSD(formatNumber(item.BookingCom.bookingValue)) : formatNumber(item.BookingCom.bookingValue)
             })}</td>
         </tr>
 
@@ -391,7 +408,7 @@ export function Table({t, language}){
             <td className="w-full  text-left border-y border-black px-4 py-4">{item.Airbnb.count}</td>
             <td className="w-full text-left border-y border-black px-4 py-4">{item.Airbnb.cancelledCount}</td>
             <td className="w-full text-right border-y border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-              value: formatNumber(item.Airbnb.bookingValue)
+              value: language == 'en' ? formatNumberUSD(formatNumber(item.Airbnb.bookingValue)) : formatNumber(item.Airbnb.bookingValue)
             })}</td>
           </tr>
           
@@ -401,24 +418,24 @@ export function Table({t, language}){
     </table>
 
     {/* Gráfico de reservas de canal */}
-        <div className="w-full flex justify-between p-8">
+        <div className="w-full flex justify-between py-5">
             <div className="w-1/3 flex flex-col justify-center items-center">
               {exemplo.map((item => 
 
-                <div class="w-full flex justify-between items-center px-4 py-2 rounded-md text-black">
+                <div class="w-full flex justify-between items-center px-2 py-2 rounded-md text-black text-sm font-normal">
                   <div>
                     <span className={
                       // "mr-7 text-4xl"
-                      item === "BookingCom" ? "text-lg font-bold mr-3 md:text-4xl md:font-normal"
-                      : item === "Airbnb" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
-                      : item === "Cancelado" ? "text-lg mr-3 font-bold md:text-4xl md:font-normal"
+                      item === "BookingCom" ? "text-2xl font-normal mr-3 "
+                      : item === "Airbnb" ? "text-2xl mr-3 font-normal "
+                      : item === "Cancelado" ? "text-2xl mr-3 font-normal "
                       : ""
                     }>{item === "Cancelado" ? t('ReservationsByChannel.table.cancel') : item}
                     </span>
                   </div>
                     
                   <div>
-                    <svg className="w-7 h-7 md:inline-block md:w-10 md:h-10  rounded-full">
+                    <svg className="w-7 h-7 rounded-full">
                         {
                         item  == "BookingCom" ? <rect x="0" y="0" width="100" height="100" fill="#15803d" />
                         : item == "Airbnb" ? <rect x="0" y="0" width="100" height="100" fill="#3b82f6" />
@@ -431,7 +448,7 @@ export function Table({t, language}){
               ))}
             </div>
             
-            <div className="w-full flex justify-end">
+            <div className="w-full flex justify-end py-2">
               <img className="w-1/2" src={graficOrigens} alt="" />
             </div>
         </div>
@@ -439,149 +456,147 @@ export function Table({t, language}){
 
     {/* Reservas por comissões */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-10 px-10 sm:text-4xl">{t('commissionBookings.title')}</h1>
+    <h1 className="text-2xl font-normal text-black py-2">{t('commissionBookings.title')}</h1>
 
-    <table className="w-full flex flex-col px-8 print:border-separate">
-      <thead  className="print:table-header-group flex text-center">
+    <table className="w-full flex flex-col tabela-fixed">
+      <thead  className="flex text-center text-sm">
         <tr className="w-full flex justify-center items-center">
-          <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('commissionBookings.header.number')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.name')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.channel')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.in')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.oct')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.status')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.item')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.value')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.calc')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.commission')}</th>
-          <th className="w-full text-left font-bold text-black border-y border-black  px-4 py-2">{t('commissionBookings.header.owner')}</th>
-
-
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black px-1 py-2">{t('commissionBookings.header.number')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.name')}</th>
+          <th className="print:tracking-tighter print:truncate	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.channel')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.in')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.oct')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.status')}</th>
+          <th className="print:tracking-tighter 	w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.item')}</th>
+          <th className="print:tracking-tighter  w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.value')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.calc')}</th>
+          <th className="print:tracking-tighter print:truncate	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.commission')}</th>
+          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.owner')}</th>
         </tr>
       </thead>
         {/* <TableHeader /> */}
 
         { 
           canal_de_comissoes.map((item) => (
-          <tbody className="text-sm sm:text-base">
-            <tr className="w-full flex text-center " key={item.id}>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">#{item.id}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.primaryGuest.name}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{item.origin}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkOut).format("DD/MM/YYYY")}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">
+          <tbody className="w-full flex flex-col justify-center text-center  text-xs print:overflow-auto">
+            <tr className="w-full flex" key={item.id}>
+              <td className="print:w-[80%] w-full text-xs text-left border-y  border-black border-t-0 px-1 py-2 text-ellipsis overflow-hidden">#{item.id}</td>
+              <td className="print:w-[85%]  w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{truncateName(item.primaryGuest.name, 20)}</td>
+              <td className="print:w-4/5 w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter print:text-[10px] truncate">{item.origin}</td>
+              <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
+              <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkOut).format("DD/MM/YYYY")}</td>
+              <td className="print:w-[80%]  w-full text-left border-y  border-black border-t-0 px-1   py-2 print:tracking-tighter print:text-[10px] truncate">
                 {
-                  language === 'en' ? item.status : item.status === "inConfirmation" ? "Em confirmação"
+                  language === 'en' ? separateWords(item.status) : item.status === "inConfirmation" ? "Em confirmação"
                   : language === 'en' ? item.status : item.status === "cancelled" ? "Cancelado"
                   : language === 'en' ? item.status : item.status === "confirmed" ? "Confirmado"
-                  : item.status 
+                  : ""
                   }
               </td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.daily')}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4 ">{t('commissionBookings.bookings.valueCommission', {
-                value: formatNumber(item.values.comissions.rateValue)
+              <td className="  w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter print:w-[85%]">{t('commissionBookings.bookings.daily')}</td>
+              <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 ">{t('commissionBookings.bookings.valueCommission', {
+                value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.rateValue)) : formatNumber(item.values.comissions.rateValue)
               })}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4 font-bold">20%</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.commission', {
-                value: formatNumber(item.values.comissions.comissions.RATES)
+              <td className="print:w-[80%]  w-full text-left border-y  border-black border-t-0 px-1 py-2 font-bold">20%</td>
+              <td className="print:w-[85%]  w-full text-left border-y  border-black border-t-0 px-1 py-2">{t('commissionBookings.bookings.commission', {
+                value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.RATES)) : formatNumber(item.values.comissions.comissions.RATES)
               })}</td>
-              <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.bookings.owner', {
-                value: formatNumber(item.values.comissions.ownerValue)
+              <td className="print:w-[82%] w-full text-left border-y  border-black border-t-0 px-1 py-2">{t('commissionBookings.bookings.owner', {
+                value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.ownerValue)) : formatNumber(item.values.comissions.ownerValue)
               })}</td>
             </tr>
                 
 
-            <table className="flex flex-col justify-end items-end">
-              <tbody className="w-full text-sm sm:text-base sm:w-full">
+            <table className="w-full flex flex-col justify-end items-end ">
+              <tbody className="w-full text-xs border-b border-black">
                 <tr className="w-full flex text-center">
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">Limp.</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.cleaning.value', {
-                    value: formatNumber(item.values.taxBreakDown.CLEANING_FEE)
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full   border-black text-left px-1 py-2"></td>
+                  <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">Limp.</td>
+                  <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.value', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.CLEANING_FEE)) : formatNumber(item.values.taxBreakDown.CLEANING_FEE)
                   })}</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">100%</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.cleaning.commission', {
-                    value: formatNumber(item.values.taxBreakDown.CLEANING_FEE)
+                  <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">100%</td>
+                  <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.commission', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.CLEANING_FEE)) : formatNumber(item.values.taxBreakDown.CLEANING_FEE)
                   })}</td>
-                  <td className="w-full text-left border-0 border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.cleaning.prop')} 0,00</td>
+                  <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.prop')} {formatNumberUSD("0,00")}</td>
                 </tr>
 
-                <tr className="flex text-center" >
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black  px-4 py-4">Serv.</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.expenses.services.value', {
-                    value: formatNumber(item.values.taxBreakDown.SERVICE_FEE)
+                <tr className="w-full flex text-center" >
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black  px-1 py-2">Serv.</td>
+                  <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.value', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.SERVICE_FEE)) : formatNumber(item.values.taxBreakDown.SERVICE_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.expenses.services.commission', {
-                    value: formatNumber(item.values.taxBreakDown.SERVICE_FEE)
+                  <td className="w-full text-left border-y border-black px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.commission', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.SERVICE_FEE)) : formatNumber(item.values.taxBreakDown.SERVICE_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black px-4 py-4">{t('commissionBookings.expenses.services.prop')} 0,00</td>
+                  <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.prop')} {formatNumberUSD("0,00")}</td>
                 </tr>
 
-                <tr className=" flex text-center" >
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Util.</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.utility.value', {
-                    value: formatNumber(item.values.comissions.comissions.UTILITY_FEE)
+                <tr className="w-full flex text-center" >
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">Util.</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.value', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.UTILITY_FEE)) : formatNumber(item.values.comissions.comissions.UTILITY_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.utility.commission', {
-                    value: formatNumber(item.values.comissions.comissions.UTILITY_FEE)
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.commission', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.UTILITY_FEE)) : formatNumber(item.values.comissions.comissions.UTILITY_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.utility.prop')} 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.prop')} {formatNumberUSD("0,00")}</td>
                 </tr>
 
-                <tr className=" flex text-center" >
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">Outras</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.others.value', {
-                    value: formatNumber(item.values.comissions.comissions.OTHER_FEE)
+                <tr className="w-full flex text-center" >
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">Outras</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.value', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.OTHER_FEE)) : formatNumber(item.values.comissions.comissions.OTHER_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4"></td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.others.value', {
-                    value: formatNumber(item.values.comissions.comissions.OTHER_FEE)
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2"></td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.value', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.OTHER_FEE)) : formatNumber(item.values.comissions.comissions.OTHER_FEE)
                   })}</td>
-                  <td className="w-full text-left border-y border-black border-t-0 px-4 py-4">{t('commissionBookings.expenses.others.prop')} 0,00</td>
+                  <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.prop')} {formatNumberUSD("0,00")}</td>
                 </tr>
-                <tr className=" flex text-center" >
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full border-none text-left px-4 py-4"></td>
-                  <td className="w-full text-left font-bold border-0 border-black px-4 py-4">Total</td>
-                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.valueSum', {
-                    value: formatNumber(item.values.rateValue)
+                <tr className="w-full flex text-center" >
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full border-none text-left px-1 py-2"></td>
+                  <td className="w-full text-left font-bold border-0 border-black px-1 py-2">Total</td>
+                  <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.valueSum', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.rateValue)) :  formatNumber(item.values.rateValue)
                   })}</td>
-                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4"></td>
-                  <td className="w-full text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.commissionSum', {
-                    value: formatNumber(item.values.comissions.totalComission)
+                  <td className="w-full  text-left font-bold border-0 border-black px-1 py-2"></td>
+                  <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.commissionSum', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.totalComission)) : formatNumber(item.values.comissions.totalComission)
                   })}</td>
-                  <td className="w-full  text-left font-bold border-0 border-black px-4 py-4">{t('commissionBookings.total.ownerSum', {
-                    value: formatNumber(item.values.comissions.ownerValue)
+                  <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.ownerSum', {
+                    value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.ownerValue)) : formatNumber(item.values.comissions.ownerValue)
                   })}</td>
                 </tr>
               </tbody>
@@ -593,24 +608,24 @@ export function Table({t, language}){
 
     {/* total */}
 
-                      <table className="flex flex-col px-8">
-                            <tbody className="text-sm sm:text-base">
+                      <table className="w-full flex flex-col">
+                            <tbody className="w-full text-xs">
                             <tr className="w-full flex text-center" >
-                              <td className="w-full text-left font-bold border-b-0 border-y border-black px-4 py-4">Total</td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
-                              <td className="w-full border-y border-b-0 border-black text-left px-4 py-4"></td>
+                              <td className="print:w-[80%] w-full text-left font-bold border-b-0 border-y border-black px-1 py-2">Total</td>
+                              <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="print:w-4/5 w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="print:w-[80%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+                              <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
 
-                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4"></td>
-                              <td className="w-full  text-left font-bold border-b-0 border-y border-black px-4 py-4">{t('commissionBookings.totalCommission.commission', {
-                                value: formatNumber(resumo[0].comissions.totalComission)
+                              <td className="print:w-[80%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2"></td>
+                              <td className="print:w-[85%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2">{t('commissionBookings.totalCommission.commission', {
+                                value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].comissions.totalComission)) : formatNumber(resumo[0].comissions.totalComission)
                               })}</td>
-                              <td className="w-full text-left font-bold border-b-0 border-y  border-black px-4 py-4">{t('commissionBookings.totalCommission.owner', {
-                                value: formatNumber(resumo[0].comissions.ownerValue)
+                              <td className="print:w-[82%] w-full text-left font-bold border-b-0 border-y  border-black px-1 py-2">{t('commissionBookings.totalCommission.owner', {
+                                value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].comissions.ownerValue)) : formatNumber(resumo[0].comissions.ownerValue)
                               })}</td>
                             </tr>
                             </tbody>
@@ -618,16 +633,16 @@ export function Table({t, language}){
 
     {/* GRÁFICO */}
 
-    <div className="w-full flex justify-between p-8">
+    <div className="w-full flex justify-between py-5">
             <div className="w-1/3 flex flex-col justify-center items-center">
               {formattedStatusCounts.map((item => 
 
                 <div class="w-full flex justify-between items-center px-4 py-2 rounded-md text-black">
                   <div>
                     <span className={
-                      Object.keys(item) == "inConfirmation" ? "text-xl font-bold lg:mr-3 lg:text-4xl lg:font-normal"
-                      : Object.keys(item) == "confirmed" ? "text-xl font-bold lg:mr-16 lg:text-4xl lg:font-normal"
-                      : Object.keys(item) == "cancelled" ? "text-xl font-bold lg:mr-24 lg:text-4xl lg:font-normal"
+                      Object.keys(item) == "inConfirmation" ? "text-2xl font-normal mr-3"
+                      : Object.keys(item) == "confirmed" ? "text-2xl font-normal mr-3"
+                      : Object.keys(item) == "cancelled" ? "text-2xl font-normal mr-3"
                       : ""
                     }>
                     {
@@ -660,9 +675,9 @@ export function Table({t, language}){
 
     {/* Taxas */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black py-5 p-8 sm:text-4xl">{t('fees.title')}</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black py-5 sm:text-4xl">{t('fees.title')}</h1>
 
-    <table className="w-full flex flex-col justify-between  table-auto px-10">
+    <table className="w-full flex flex-col justify-between  table-auto">
             <thead className="">
                 <tr className="flex justify-between px-4">
                 <th className="flex text-left  text-black py-4 ">{t('fees.titleTable')}</th>
@@ -677,7 +692,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-gray-800">{t('fees.cleaningFees')}</div>
                 <div className="text-black font-bold">{t('fees.cleaningFeesValue', {
-                  value: formatNumber(resumo[0].taxBreakDown.CLEANING_FEE)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxBreakDown.CLEANING_FEE)) : formatNumber(resumo[0].taxBreakDown.CLEANING_FEE)
                 })}</div>
                 </div>
             </td>
@@ -687,7 +702,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className="text-black-800">{t('fees.bedLinenFees')}</div>
                 <div className="text-black font-bold">{t('fees.bedLinenFeesValeu', {
-                  value: formatNumber(resumo[0].taxBreakDown.LINEN_FEE)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxBreakDown.LINEN_FEE)) : formatNumber(resumo[0].taxBreakDown.LINEN_FEE)
                 })}</div>
                 </div>
             </td>
@@ -697,7 +712,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-gray-800">{t('fees.serviceCharge')}</div>
                 <div className="text-black font-bold">{t('fees.serviceChargeValue', {
-                  value: formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)) : formatNumber(resumo[0].taxBreakDown.SERVICE_FEE)
                 })}</div>
                 </div>
             </td>
@@ -707,7 +722,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-gray-800">{t('fees.utilityLinenFees')}</div>
                 <div className="text-black font-bold">{t('fees.utilityLinenFeesValue', {
-                  value: formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)) : formatNumber(resumo[0].taxBreakDown.UTILITY_FEE)
                 })}</div>
                 </div>
             </td>
@@ -717,7 +732,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-gray-800">{t('fees.otherFees')}</div>
                 <div className="text-black font-bold">{t('fees.otherFeesValue', {
-                  value: formatNumber(resumo[0].taxBreakDown.OTHER_FEE)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxBreakDown.OTHER_FEE)) : formatNumber(resumo[0].taxBreakDown.OTHER_FEE)
                 })}</div>
                 </div>
             </td>
@@ -730,7 +745,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">{t('fees.totalValue')}</div>
                 <div className="text-black font-bold">{t('fees.totalValueValue', {
-                  value: formatNumber(resumo[0].taxTotal)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].taxTotal)) : formatNumber(resumo[0].taxTotal)
                 })}</div>
                 </div>
             </td>
@@ -743,9 +758,9 @@ export function Table({t, language}){
 
     {/* Despesas e ajustes */}
 
-    <h1 className="text-lg sm:text-left font-normal text-black p-8 sm:text-4xl">{t('expensesAndAdjustments.title')}</h1>
+    <h1 className="text-lg sm:text-left font-normal text-black sm:text-4xl py-5">{t('expensesAndAdjustments.title')}</h1>
 
-    <table className="w-full flex flex-col table-auto px-10">
+    <table className="w-full flex flex-col table-auto">
       <thead  className="flex text-center">
         <tr className="w-full flex justify-center items-center">
           <th className="w-full text-left font-bold text-black border-y border-black px-4 py-2">{t('expensesAndAdjustments.header.expenses')}</th>
@@ -761,10 +776,10 @@ export function Table({t, language}){
             <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.total')}</td>
             <td className="w-full  text-left border-y border-black px-4 py-4 border-t-0  font-bold"></td>
             <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.admValue', {
-              value: formatNumber(item.comissions.adminValue)
+              value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.adminValue)) : formatNumber(item.comissions.adminValue)
             })}</td>
             <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{t('expensesAndAdjustments.propValue', {
-              value: formatNumber(item.comissions.ownerValue)
+              value:language == 'en' ? formatNumberUSD(formatNumber(item.comissions.ownerValue)) : formatNumber(item.comissions.ownerValue)
             })}</td>
           </tr>
         ))}
@@ -774,7 +789,7 @@ export function Table({t, language}){
 
     {/* Totais */}
 
-    <table className="w-full flex flex-col table-auto p-8">
+    <table className="w-full flex flex-col table-auto">
             <thead>
                 <tr>
                 <th className="text-lg sm:text-left font-normal text-black py-4 sm:text-4xl">{t('totais.title')}</th>
@@ -788,7 +803,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black">{t('totais.totalAdministratorInCommissions')}</div>
                 <div className="text-black">{t('totais.totalAdministratorInCommissionsValue', {
-                  value: formatNumber(item.comissions.adminValue)
+                  value: language =='en' ? formatNumberUSD(formatNumber(item.comissions.adminValue)) : formatNumber(item.comissions.adminValue)
                 })}</div>
                 </div>
             </td>
@@ -798,7 +813,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className="text-black">{t('totais.administratorDeductions')}</div>
                 <div className="text-black">{t('totais.administratorDeductionsValue', {
-                  value: formatNumber(item.comissions.adminValue)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.adminValue)) : formatNumber(item.comissions.adminValue)
                 })}</div>
                 </div>
             </td>
@@ -808,7 +823,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black">{t('totais.totalOwnershipInTransfers')}</div>
                 <div className="text-black">{t('totais.totalOwnershipInTransfersValue', {
-                  value: formatNumber(item.comissions.ownerValue)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.ownerValue)) : formatNumber(item.comissions.ownerValue)
                 })}</div>
                 </div>
             </td>
@@ -818,7 +833,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black">{t('totais.homeownerDeductions')}</div>
                 <div className="text-black">{t('totais.homeownerDeductionsValue', {
-                  value: formatNumber(item.comissions.ownerValue)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.ownerValue)) : formatNumber(item.comissions.ownerValue)
                 })}</div>
                 </div>
             </td>
@@ -828,7 +843,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">{t('totais.ownerSubtotal')}</div>
                 <div className="text-black">{t('totais.ownerSubtotalValue', {
-                  value: formatNumber(item.comissions.ownerValue)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.ownerValue)) : formatNumber(item.comissions.ownerValue)
                 })}</div>
                 </div>
             </td>
@@ -838,7 +853,7 @@ export function Table({t, language}){
                 <div className="flex justify-between">
                 <div className=" text-black font-bold">{t('totais.administratorSubtotal')}</div>
                 <div className="text-black">{t('totais.administratorSubtotalValue', {
-                  value: formatNumber(item.comissions.adminValue)
+                  value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.adminValue)) : formatNumber(item.comissions.adminValue)
                 })}</div>
                 </div>
             </td>
