@@ -62,6 +62,30 @@
           "commission": "€ {{value}}",
           "owner": "€ {{value}}"
         },
+        "expenses": {
+          "cleaning": {
+              "value": "€ {{value}}",
+              "commission":"€ {{value}}",
+              "prop": "€"
+          },
+          "services": {
+              "value": "€ {{value}}",
+              "commission":"€ {{value}}",
+              "prop": "€"
+
+          },
+          "utility": {
+              "value": "€ {{value}}",
+              "commission":"€ {{value}}",
+              "prop": "€"
+          },
+          "others": {
+              "value": "€ {{value}}",
+              "commission":"€ {{value}}",
+              "prop": "€"
+          }
+
+      },
         "ghapic": {
           "inConfirmation": "En confirmation",
           "canceled": "Annulé",

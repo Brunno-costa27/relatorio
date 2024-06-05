@@ -471,7 +471,7 @@ export function Table({t, language}){
           <th className="print:tracking-tighter  w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.value')}</th>
           <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.calc')}</th>
           <th className="print:tracking-tighter print:truncate	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.commission')}</th>
-          <th className="print:tracking-tighter 	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.owner')}</th>
+          <th className="print:tracking-tighter print:truncate	 w-full text-left font-bold text-black border-y  border-black  px-1 py-2">{t('commissionBookings.header.owner')}</th>
         </tr>
       </thead>
         {/* <TableHeader /> */}
