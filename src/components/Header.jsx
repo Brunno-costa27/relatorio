@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import logo from "../assets/image.png"
 import data from "../database/data-set"
-import moment from 'moment';
 
 export function Header({t, language}){
     
@@ -10,11 +9,7 @@ export function Header({t, language}){
     ];
 
     const method = data[0].bookings.bookings[0].roomType.meta.comissionFee
-    
-    
-    
     const dateString = new Date();
-    const formatDate = moment(dateString).format("DD/MM/YYYY, h:mm");
 
     return(
         <>                       
@@ -37,6 +32,6 @@ export function Header({t, language}){
                 </div>
                 
             </header>
-    </>
+        </>
     )
 }
