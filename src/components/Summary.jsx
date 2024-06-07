@@ -85,7 +85,6 @@ export function Summary({t, language, resumo}){
     return(
 
         <>
-        
             <table className="w-full font-sans flex flex-col table-auto">
                 <thead>
                     <tr>
