@@ -12,9 +12,9 @@ export function Fees({t, language, resumo}){
         <>
             {/* Taxas */}
 
-    <h1 className="text-2xl  font-normal text-black">{t('fees.title')}</h1>
+    <h1 className="text-2xl  font-normal text-black p-y">{t('fees.title')}</h1>
 
-<table className="w-full flex flex-col justify-between  table-auto">
+<table className="w-full flex flex-col justify-between table-auto">
         <thead className="text-sm">
             <tr className="flex justify-between px-4">
             <th className="flex text-left  text-black py-4 ">{t('fees.titleTable')}</th>

@@ -10,7 +10,7 @@ export function Totals({ t, language, resumo}){
     <table className="w-full flex flex-col table-auto">
             <thead className="text-sm">
                 <tr>
-                <th className="text-2xl  font-normal text-black py-4 ">{t('totais.title')}</th>
+                <th className="text-2xl font-normal text-black py-4 ">{t('totais.title')}</th>
                 </tr>
             </thead>
         <tbody className="text-xs">

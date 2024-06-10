@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { formatNumber, formatNumberUSD, separateWords } from "../functions"
+import { formatNumber, formatNumberUSD, separateWords } from "../functions/functions"
 import QuickChart from "quickchart-js"
 
 export function CommissionBookings({ t, language, canal_de_comissoes, resumo }) {
