@@ -1,10 +1,16 @@
 import moment from 'moment';
+import 'moment/dist/locale/pt-br';
+
 import { formatNumber, formatNumberUSD, separateWords } from "../functions/functions"
 import QuickChart from "quickchart-js"
 
-export function CommissionBookings({ t, language, canal_de_comissoes, resumo }) {
+export async function CommissionBookings({ t, language, canal_de_comissoes, resumo }) {
 
+  await import(`moment/dist/locale/${language}`) 
+  // import `moment/locale/${language}`
+  moment.locale(language)
 
+  console.log("setLanguge", language)
   const statusCounts = canal_de_comissoes.reduce((acc, booking) => {
     const status = booking.status;
     acc[status] = (acc[status] || 0) + 1;
@@ -97,8 +103,8 @@ export function CommissionBookings({ t, language, canal_de_comissoes, resumo }) 
                 <td className="print:w-[80%] w-full text-xs text-left border-y  border-black border-t-0 px-1 py-2 text-ellipsis overflow-hidden">#{item.id}</td>
                 <td className="print:w-[85%]  w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px] truncate">{item.primaryGuest.name}</td>
                 <td className="print:w-4/5 w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter print:text-[10px] truncate">{item.origin}</td>
-                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{language === 'en' ? moment(item.checkIn, "YYYY-MM-DD").format("l") : moment(item.checkIn).format("DD/MM/YYYY")}</td>
-                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{language === 'en' ? moment(item.checkOut, "YYYY-MM-DD").format("l") : moment(item.checkOut).format("DD/MM/YYYY")}</td>
+                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkIn, "YYYY-MM-DD").format("llll")}</td>
+                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkOut, "YYYY-MM-DD").format("llll")}</td>
                 <td className="print:w-[80%]  w-full text-left border-y  border-black border-t-0 px-1   py-2 print:tracking-tighter print:text-[10px] truncate">
                   {
                     language === 'en' ? separateWords(item.status) : item.status === "inConfirmation" ? "Em confirmação"
