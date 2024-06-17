@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next"
 import { Header } from "./components/Header"
 import { useState } from "react"
+import './App.css'
+
 import data from "../src/database/data-set"
 import { Summary } from "./components/Summary"
 import { ReservationsByChannel } from "./components/ReservationByChannel"
@@ -8,11 +10,14 @@ import { CommissionBookings } from './components/CommissionBookings'
 import { Fees } from "./components/Fees"
 import { ExpensesAndAdjustments } from "./components/ExpensesAndAdjustments"
 import { Totals } from "./components/Totals"
-
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 function App() {
+
+
   
-  const resumo = [
+  const summary = [
     data[0].bookings.summary
   ]
 
@@ -28,12 +33,25 @@ function App() {
 
 
   function handleChangeLanguage(){
-      const newLanguage = currentLanguage === 'en-us' ? 'pt-br' : 'en-us' 
+      const newLanguage = currentLanguage === 'en-US' ? 'pt-br' : 'en-US' 
       
       changeLanguage(newLanguage)
       setCurrentLanguage(newLanguage)
+
   }
 
+
+  moment.locale(language); // Configura o locale para pt-br
+  console.log('Locale atual:', moment.locale()); // Deve mostrar 'pt-br'
+  let currency = ''
+
+    if (language === 'en-US') {
+        currency = 'USD'
+
+    } else if (language === 'pt-br') {
+        currency = 'BRL'
+        
+    }
 
   return (
     <>
@@ -45,12 +63,12 @@ function App() {
       </div>
 
       <Header t={t} language={language}/>
-      <Summary t={t} language={language} resumo={resumo}/>
-      <ReservationsByChannel t={t} language={language} canal_de_reservas={canal_de_reservas} resumo={resumo}/>
-      <CommissionBookings t={t} language={language} canal_de_comissoes={canal_de_comissoes} resumo={resumo}/>
-      <Fees t={t} language={language} resumo={resumo} />
-      <ExpensesAndAdjustments t={t} language={language} resumo={resumo}/>
-      <Totals t={t} language={language} resumo={resumo}/>
+      <Summary t={t} language={language} currency={currency} summary={summary}/>
+      <ReservationsByChannel t={t} language={language} currency={currency} canal_de_reservas={canal_de_reservas} summary={summary}/>
+      <CommissionBookings t={t} language={language} currency={currency} canal_de_comissoes={canal_de_comissoes} summary={summary}/>
+      <Fees t={t} language={language} currency={currency} summary={summary} />
+      <ExpensesAndAdjustments t={t} currency={currency} language={language} summary={summary}/>
+      <Totals t={t} language={language} currency={currency}  summary={summary}/>
 
     </>
   )

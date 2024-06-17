@@ -1,9 +1,12 @@
 
-import { formatNumber, formatNumberUSD } from "../functions/functions.js"
+import {  formatNumberByLanguage } from "../functions/functions.js"
 import QuickChart from "quickchart-js"
+import moment from 'moment'
+import 'moment/dist/locale/pt-br'
 
+export function Summary({t, language, currency, summary}){
 
-export function Summary({t, language, resumo}){
+  moment.locale(language)
 
     const chart1 = new QuickChart();
 
@@ -17,8 +20,8 @@ export function Summary({t, language, resumo}){
         datasets: [
           {
             data: [
-              ((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0),
-              100-((resumo[0].bookingCount-resumo[0].cancelattionSummary.count)/resumo[0].bookingCount*100).toFixed(0)
+              ((summary[0].bookingCount-summary[0].cancelattionSummary.count)/summary[0].bookingCount*100).toFixed(0),
+              100-((summary[0].bookingCount-summary[0].cancelattionSummary.count)/summary[0].bookingCount*100).toFixed(0)
             ],
             backgroundColor: ['green', '#eee'],
             label: 'Dataset 1',
@@ -74,18 +77,12 @@ export function Summary({t, language, resumo}){
 
     const graficSummary = chart1.getUrl();
 
-    // Essa parte não funciona
-    // Get the image...
-    // const image = await chart.toBinary();
-
-    // Or write it to a file
-    // chart.toFile('chart.png');
 
 
     return(
 
         <>
-            <table className="w-full font-sans flex flex-col table-auto">
+            <table className="w-full  flex flex-col table-auto">
                 <thead>
                     <tr>
                     <th className="text-2xl font-normal text-black py-2">{t('summary.summary')}</th>
@@ -93,7 +90,7 @@ export function Summary({t, language, resumo}){
                 </thead>
 
                 <tbody className="text-xs">
-                    {resumo.map((item) => (
+                    {summary.map((item) => (
                         <>
                     <tr className="flex">
                     <td className="w-full text-left border-y text-black border-black px-2 py-2">
@@ -124,7 +121,7 @@ export function Summary({t, language, resumo}){
                         <div className="flex justify-between">
                         <div className="text-black">{t('summary.averageDailyRate')}</div>
                         <div className="text-black">{t('summary.averageDailyRateValue', {
-                        value: language == 'en' ? formatNumberUSD(formatNumber(item.avgBookingValuePerDay)) : formatNumber(item.avgBookingValuePerDay)})}</div>
+                        value: formatNumberByLanguage(item.avgBookingValuePerDay, currency, language)})}</div>
                         </div>
                     </td>
                     </tr>
@@ -141,7 +138,7 @@ export function Summary({t, language, resumo}){
                         <div className="flex justify-between">
                         <div className="text-black">{t('summary.totalValueInDailyRates')}</div>
                         <div className="text-black">{t('summary.totalValueInDailyRatesValue', {
-                        value: language == 'en' ? formatNumberUSD(formatNumber(item.bookingValue)) : formatNumber(item.bookingValue)})}</div>
+                        value:  formatNumberByLanguage(item.bookingValue, currency, language) })}</div>
                         </div>
                     </td>
                     </tr>
@@ -150,7 +147,7 @@ export function Summary({t, language, resumo}){
                         <div className="flex justify-between">
                         <div className="text-black">{t('summary.totalValueInFees')}</div>
                         <div className="text-black">{t('summary.totalValueInFeesValue', {
-                        value: language == 'en' ? formatNumberUSD(formatNumber(item.taxTotal)) : formatNumber(item.taxTotal)
+                        value: formatNumberByLanguage(item.taxTotal, currency, language) 
                         })}</div>
                         </div>
                     </td>

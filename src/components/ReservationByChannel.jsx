@@ -1,9 +1,9 @@
-import { formatNumber, formatNumberUSD } from "../functions/functions.js"
+import { formatNumberByLanguage } from "../functions/functions.js"
 import QuickChart from "quickchart-js"
 
 
 
-export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
+export function ReservationsByChannel({t, language, currency, canal_de_reservas, summary}){
 
       const exemplo = []
       canal_de_reservas.forEach((item => {
@@ -31,7 +31,7 @@ export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
               data: [
                 canal_de_reservas[0].BookingCom.count, 
                 canal_de_reservas[0].Airbnb.count,
-                resumo[0].statusCount.canceled
+                summary[0].statusCount.canceled
               ],
               backgroundColor: ['green', '#3b82f6', '#eee'],       
             }
@@ -42,7 +42,7 @@ export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
             doughnutlabel: {
               labels: [
                 { 
-                  text: resumo[0].bookingCount, 
+                  text: summary[0].bookingCount, 
                   font: { size: 20 },
                   color: 'black'
                 }, 
@@ -70,12 +70,6 @@ export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
 
       var graficOrigens = chart.getUrl() 
 
-      // Essa parte não funciona
-      // // Get the graficOrigens...
-      // const async graficOrigens = await chart.toBinary();
-
-      // // Or write it to a file
-      // chart.toFile('chart.png');
 
     return(
 
@@ -101,7 +95,7 @@ export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
         <td className="w-full  text-left  border-black px-4 py-4">{item.BookingCom.count}</td>
         <td className="w-full text-left  border-black px-4 py-4">{item.BookingCom.cancelledCount}</td>
         <td className="w-full text-right  border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-          value: language == 'en' ? formatNumberUSD(formatNumber(item.BookingCom.bookingValue)) : formatNumber(item.BookingCom.bookingValue)
+          value: formatNumberByLanguage(item.BookingCom.bookingValue, currency, language) 
         })}</td>
     </tr>
 
@@ -110,7 +104,7 @@ export function ReservationsByChannel({t, language, canal_de_reservas, resumo}){
         <td className="w-full  text-left border-y border-black px-4 py-4">{item.Airbnb.count}</td>
         <td className="w-full text-left border-y border-black px-4 py-4">{item.Airbnb.cancelledCount}</td>
         <td className="w-full text-right border-y border-black px-4 py-4">{t('ReservationsByChannel.table.bookingCom', {
-          value: language == 'en' ? formatNumberUSD(formatNumber(item.Airbnb.bookingValue)) : formatNumber(item.Airbnb.bookingValue)
+          value:  formatNumberByLanguage(item.Airbnb.bookingValue, currency, language) 
         })}</td>
       </tr>
       

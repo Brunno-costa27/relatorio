@@ -1,13 +1,9 @@
-import { formatNumber } from "../functions/functions.js"
+import { formatNumber, formatNumberByLanguage } from "../functions/functions.js"
 
-export function ExpensesAndAdjustments({t, language, resumo}) {
+export function ExpensesAndAdjustments({t, language, currency, summary}) {
 
 
-    function formatNumberUSD(number) {
-        const numberString = number.toString();
-        console.log(numberString)
-        return numberString.replace(',', '.')
-      }
+    
     return(
         <>
             {/* Despesas e ajustes */}
@@ -25,15 +21,15 @@ export function ExpensesAndAdjustments({t, language, resumo}) {
     </tr>
   </thead>
   <tbody className="text-xs">
-    {resumo.map((item) => (
+    {summary.map((item) => (
       <tr className="w-full flex text-center" key={item.categoria}>
         <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.total')}</td>
         <td className="w-full  text-left border-y border-black px-4 py-4 border-t-0  font-bold"></td>
         <td className="w-full text-left border-y border-black px-4 py-4  border-t-0 font-bold">{t('expensesAndAdjustments.admValue', {
-          value: language == 'en' ? formatNumberUSD(formatNumber(item.comissions.adminValue)) : formatNumber(item.comissions.adminValue)
+          value:  formatNumberByLanguage(item.comissions.adminValue, currency, language) 
         })}</td>
         <td className="w-full text-right border-y border-black px-4 py-4 border-t-0  font-bold">{t('expensesAndAdjustments.propValue', {
-          value:language == 'en' ? formatNumberUSD(formatNumber(item.comissions.ownerValue)) : formatNumber(item.comissions.ownerValue)
+          value: formatNumberByLanguage(item.comissions.ownerValue, currency, language) 
         })}</td>
       </tr>
     ))}

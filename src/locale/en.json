@@ -12,12 +12,12 @@
             "totalReservations": "Total Reservations",
             "averageStay": "Average Stay",
             "averageDailyRate": "Average Daily Rate",
-            "averageDailyRateValue": "$ {{value}}",
+            "averageDailyRateValue": "{{value}}",
             "canceledReservations": "Canceled Reservations",
             "totalValueInDailyRates": "Total Value in Daily Rates",
-            "totalValueInDailyRatesValue": "$ {{value}}",
+            "totalValueInDailyRatesValue": " {{value}}",
             "totalValueInFees": "Total Value in Fees",
-            "totalValueInFeesValue": "$ {{value}}",
+            "totalValueInFeesValue": " {{value}}",
             "graphic": {
                 "occupation": "Occupation",
                 "canceled": "Canceled"
@@ -28,8 +28,8 @@
             "table": {
                 "channel": "Channel",
                 "salesValue": "Sales Value.",
-                "bookingCom": "$ {{value}}",
-                "airbnb": "$ {{value}}", 
+                "bookingCom": " {{value}}",
+                "airbnb": " {{value}}", 
                 "cancel": "cancel"
             }
         },
@@ -50,40 +50,40 @@
             },
             "bookings":{
                 "daily": "Daily",
-                "valueCommission": "$ {{value}}",
-                "commission": "$ {{value}}",
-                "owner": "$ {{value}}"
+                "valueCommission": " {{value}}",
+                "commission": " {{value}}",
+                "owner": " {{value}}"
             },
             "total": {
-                "valueSum": "$ {{value}}",
-                "commissionSum": "$ {{value}}",
-                "ownerSum": "$ {{value}}"
+                "valueSum": " {{value}}",
+                "commissionSum": " {{value}}",
+                "ownerSum": " {{value}}"
             }, 
             "totalCommission": {
-                "commission": "$ {{value}}",
-                "owner": "$ {{value}}"
+                "commission": " {{value}}",
+                "owner": " {{value}}"
             },
             "expenses": {
                 "cleaning": {
-                    "value": "$ {{value}}",
-                    "commission":"$ {{value}}",
-                    "prop": "$"
+                    "value": " {{value}}",
+                    "commission":" {{value}}",
+                    "prop": ""
                 },
                 "services": {
-                    "value": "$ {{value}}",
-                    "commission":"$ {{value}}",
-                    "prop": "$"
+                    "value": " {{value}}",
+                    "commission":" {{value}}",
+                    "prop": ""
 
                 },
                 "utility": {
-                    "value": "$ {{value}}",
-                    "commission":"$ {{value}}",
-                    "prop": "$"
+                    "value": " {{value}}",
+                    "commission":" {{value}}",
+                    "prop": ""
                 },
                 "others": {
-                    "value": "$ {{value}}",
-                    "commission":"$ {{value}}",
-                    "prop": "$"
+                    "value": " {{value}}",
+                    "commission":" {{value}}",
+                    "prop": ""
                 }
 
             },
@@ -99,24 +99,24 @@
             "title": "Fees",
             "titleTable": "Fees",
             "cleaningFees": "Cleaning Fees",
-            "cleaningFeesValue": "$ {{value}}",
+            "cleaningFeesValue": " {{value}}",
             "bedLinenFees": "Bed Linen Fees",
-            "bedLinenFeesValeu": "$ {{value}}",
+            "bedLinenFeesValeu": " {{value}}",
             "serviceCharge": "Service Charge",
-            "serviceChargeValue": "$ {{value}}",
+            "serviceChargeValue": " {{value}}",
             "utilityLinenFees": "Utility Linen Fees",
-            "utilityLinenFeesValue": "$ {{value}}",
+            "utilityLinenFeesValue": " {{value}}",
             "otherFees": "Other Fees",
-            "otherFeesValue": "$ {{value}}",
+            "otherFeesValue": " {{value}}",
             "totalValue": "Total Value",
-            "totalValueValue": "$ {{value}}"
+            "totalValueValue": " {{value}}"
 
         },
         "expensesAndAdjustments": {
             "title": "Expenses And Adjustments",
             "total": "Totals",
-            "admValue": "$ {{value}}",
-            "propValue": "$ {{value}}",
+            "admValue": " {{value}}",
+            "propValue": " {{value}}",
             "header": {
                 "expenses": "Expenses",
                 "maturity": "Maturity",
@@ -127,17 +127,17 @@
         "totais": {
             "title": "Totals",
             "totalAdministratorInCommissions": "Total Administrator in commissions",
-            "totalAdministratorInCommissionsValue": "$ {{value}}",
+            "totalAdministratorInCommissionsValue": " {{value}}",
             "administratorDeductions": "Administrator Deductions",
-            "administratorDeductionsValue": "$ {{value}}",
+            "administratorDeductionsValue": " {{value}}",
             "totalOwnershipInTransfers": "Total Ownership in Transfers",
-            "totalOwnershipInTransfersValue": "$ {{value}}",
+            "totalOwnershipInTransfersValue": " {{value}}",
             "homeownerDeductions": "Homeowner Deductions",
-            "homeownerDeductionsValue": "$ {{value}}",
+            "homeownerDeductionsValue": " {{value}}",
             "ownerSubtotal": "Owner Subtotal",
-            "ownerSubtotalValue": "$ {{value}}",
+            "ownerSubtotalValue": " {{value}}",
             "administratorSubtotal": "Administrator Subtotal",
-            "administratorSubtotalValue": "$ {{value}}"
+            "administratorSubtotalValue": " {{value}}"
 
         }
     }

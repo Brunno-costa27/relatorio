@@ -15,10 +15,11 @@
   return result;
 }
 
-function formatNumberUSD(number) {
-  const numberString = number.toString();
-  console.log(numberString)
-  return numberString.replace(',', '.')
+
+
+function formatNumberByLanguage(num, currency, locale) {
+
+  return num?.toLocaleString(locale, { style: "currency", currency: currency });
 }
 
 
@@ -29,6 +30,6 @@ function formatNumberUSD(number) {
   export {
     formatNumber, 
     separateWords,
-    formatNumberUSD
+    formatNumberByLanguage
   }
   

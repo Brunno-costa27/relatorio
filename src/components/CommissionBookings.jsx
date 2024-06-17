@@ -1,12 +1,12 @@
 import moment from 'moment';
 import 'moment/dist/locale/pt-br';
 
-import { formatNumber, formatNumberUSD, separateWords } from "../functions/functions"
+import { separateWords, formatNumberByLanguage } from "../functions/functions"
 import QuickChart from "quickchart-js"
 
-export async function CommissionBookings({ t, language, canal_de_comissoes, resumo }) {
+export function CommissionBookings({ t, language, currency, canal_de_comissoes, summary }) {
 
-  await import(`moment/dist/locale/${language}`) 
+  // await import(`moment/dist/locale/${language}`) 
   // import `moment/locale/${language}`
   moment.locale(language)
 
@@ -47,7 +47,7 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
 
           labels: [
             {
-              text: resumo[0].bookingCount,
+              text: summary[0].bookingCount,
               font: { size: 20 },
               color: 'black'
             },
@@ -103,8 +103,8 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                 <td className="print:w-[80%] w-full text-xs text-left border-y  border-black border-t-0 px-1 py-2 text-ellipsis overflow-hidden">#{item.id}</td>
                 <td className="print:w-[85%]  w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px] truncate">{item.primaryGuest.name}</td>
                 <td className="print:w-4/5 w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter print:text-[10px] truncate">{item.origin}</td>
-                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkIn, "YYYY-MM-DD").format("llll")}</td>
-                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkOut, "YYYY-MM-DD").format("llll")}</td>
+                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkIn).format("l")}</td>
+                <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter	print:text-[10px]">{moment(item.checkOut).format("l")}</td>
                 <td className="print:w-[80%]  w-full text-left border-y  border-black border-t-0 px-1   py-2 print:tracking-tighter print:text-[10px] truncate">
                   {
                     language === 'en' ? separateWords(item.status) : item.status === "inConfirmation" ? "Em confirmação"
@@ -115,14 +115,14 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                 </td>
                 <td className="  w-full text-left border-y  border-black border-t-0 px-1 py-2 print:tracking-tighter print:w-[85%]">{t('commissionBookings.bookings.daily')}</td>
                 <td className="print:w-[85%] w-full text-left border-y  border-black border-t-0 px-1 py-2 ">{t('commissionBookings.bookings.valueCommission', {
-                  value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.rateValue)) : formatNumber(item.values.comissions.rateValue)
+                  value: formatNumberByLanguage(item.values.comissions.rateValue, currency, language) 
                 })}</td>
                 <td className="print:w-[80%]  w-full text-left border-y  border-black border-t-0 px-1 py-2 font-bold">20%</td>
                 <td className="print:w-[85%]  w-full text-left border-y  border-black border-t-0 px-1 py-2">{t('commissionBookings.bookings.commission', {
-                  value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.RATES)) : formatNumber(item.values.comissions.comissions.RATES)
+                  value: formatNumberByLanguage(item.values.comissions.comissions.RATES, currency, language) 
                 })}</td>
                 <td className="print:w-[82%] w-full text-left border-y  border-black border-t-0 px-1 py-2">{t('commissionBookings.bookings.owner', {
-                  value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.ownerValue)) : formatNumber(item.values.comissions.ownerValue)
+                  value: formatNumberByLanguage(item.values.comissions.ownerValue, currency, language) 
                 })}</td>
               </tr>
 
@@ -138,13 +138,13 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                     <td className="w-full   border-black text-left px-1 py-2"></td>
                     <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">Limp.</td>
                     <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.value', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.CLEANING_FEE)) : formatNumber(item.values.taxBreakDown.CLEANING_FEE)
+                      value:  formatNumberByLanguage(item.values.taxBreakDown.CLEANING_FEE, currency, language) 
                     })}</td>
                     <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">100%</td>
                     <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.commission', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.CLEANING_FEE)) : formatNumber(item.values.taxBreakDown.CLEANING_FEE)
+                      value:  formatNumberByLanguage(item.values.taxBreakDown.CLEANING_FEE, currency, language) 
                     })}</td>
-                    <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.prop')} {formatNumberUSD("0,00")}</td>
+                    <td className="w-full text-left border-0  border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.cleaning.prop')} {formatNumberByLanguage("0,00", currency, language)}</td>
                   </tr>
 
                   <tr className="w-full flex text-center" >
@@ -156,13 +156,13 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                     <td className="w-full border-none text-left px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black  px-1 py-2">Serv.</td>
                     <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.value', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.SERVICE_FEE)) : formatNumber(item.values.taxBreakDown.SERVICE_FEE)
+                      value:  formatNumberByLanguage(item.values.taxBreakDown.SERVICE_FEE, currency, language) 
                     })}</td>
                     <td className="w-full text-left border-y border-black px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.commission', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.taxBreakDown.SERVICE_FEE)) : formatNumber(item.values.taxBreakDown.SERVICE_FEE)
+                      value:  formatNumberByLanguage(item.values.taxBreakDown.SERVICE_FEE, currency, language)
                     })}</td>
-                    <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.prop')} {formatNumberUSD("0,00")}</td>
+                    <td className="w-full text-left border-y border-black px-1 py-2">{t('commissionBookings.expenses.services.prop')} {formatNumberByLanguage("0,00", currency, language)}</td>
                   </tr>
 
                   <tr className="w-full flex text-center" >
@@ -174,13 +174,13 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                     <td className="w-full border-none text-left px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">Util.</td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.value', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.UTILITY_FEE)) : formatNumber(item.values.comissions.comissions.UTILITY_FEE)
+                      value:  formatNumberByLanguage(item.values.comissions.comissions.UTILITY_FEE, currency, language) 
                     })}</td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.commission', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.UTILITY_FEE)) : formatNumber(item.values.comissions.comissions.UTILITY_FEE)
+                      value:  formatNumberByLanguage(item.values.comissions.comissions.UTILITY_FEE, currency, language) 
                     })}</td>
-                    <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.prop')} {formatNumberUSD("0,00")}</td>
+                    <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.utility.prop')} {formatNumberByLanguage("0,00", currency, language)}</td>
                   </tr>
 
                   <tr className="w-full flex text-center" >
@@ -192,13 +192,13 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                     <td className="w-full border-none text-left px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">Outras</td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.value', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.OTHER_FEE)) : formatNumber(item.values.comissions.comissions.OTHER_FEE)
+                      value:  formatNumberByLanguage(item.values.comissions.comissions.OTHER_FEE, currency, language)
                     })}</td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2"></td>
                     <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.value', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.comissions.OTHER_FEE)) : formatNumber(item.values.comissions.comissions.OTHER_FEE)
+                      value:  formatNumberByLanguage(item.values.comissions.comissions.OTHER_FEE, currency, language)
                     })}</td>
-                    <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.prop')} {formatNumberUSD("0,00")}</td>
+                    <td className="w-full text-left border-y border-black border-t-0 px-1 py-2">{t('commissionBookings.expenses.others.prop')} {formatNumberByLanguage("0,00", currency, language)}</td>
                   </tr>
                   <tr className="w-full flex text-center" >
                     <td className="w-full border-none text-left px-1 py-2"></td>
@@ -209,14 +209,14 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
                     <td className="w-full border-none text-left px-1 py-2"></td>
                     <td className="w-full text-left font-bold border-0 border-black px-1 py-2">Total</td>
                     <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.valueSum', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.rateValue)) : formatNumber(item.values.rateValue)
+                      value:  formatNumberByLanguage(item.values.rateValue, currency, language) 
                     })}</td>
                     <td className="w-full  text-left font-bold border-0 border-black px-1 py-2"></td>
                     <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.commissionSum', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.totalComission)) : formatNumber(item.values.comissions.totalComission)
+                      value:  formatNumberByLanguage(item.values.comissions.totalComission, currency, language) 
                     })}</td>
                     <td className="w-full text-left font-bold border-0 border-black px-1 py-2">{t('commissionBookings.total.ownerSum', {
-                      value: language == 'en' ? formatNumberUSD(formatNumber(item.values.comissions.ownerValue)) : formatNumber(item.values.comissions.ownerValue)
+                      value:  formatNumberByLanguage(item.values.comissions.ownerValue, currency, language) 
                     })}</td>
                   </tr>
                 </tbody>
@@ -242,10 +242,10 @@ export async function CommissionBookings({ t, language, canal_de_comissoes, resu
 
             <td className="print:w-[80%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2"></td>
             <td className="print:w-[85%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2">{t('commissionBookings.totalCommission.commission', {
-              value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].comissions.totalComission)) : formatNumber(resumo[0].comissions.totalComission)
+              value:  formatNumberByLanguage(summary[0].comissions.totalComission, currency, language) 
             })}</td>
             <td className="print:w-[82%] w-full text-left font-bold border-b-0 border-y  border-black px-1 py-2">{t('commissionBookings.totalCommission.owner', {
-              value: language == 'en' ? formatNumberUSD(formatNumber(resumo[0].comissions.ownerValue)) : formatNumber(resumo[0].comissions.ownerValue)
+              value:  formatNumberByLanguage(summary[0].comissions.ownerValue, currency, language) 
             })}</td>
           </tr>
         </tbody>
