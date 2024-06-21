@@ -22,7 +22,7 @@ i18n
   .use(initReactI18next) 
   .init({
     resources,
-    lng: "pt-br", 
+    lng: "en-US", 
   });
 
   export default i18n;

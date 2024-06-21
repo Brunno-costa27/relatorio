@@ -32,13 +32,13 @@ function App() {
   const [currentLanguage, setCurrentLanguage] = useState(language)
 
 
-  function handleChangeLanguage(){
-      const newLanguage = currentLanguage === 'en-US' ? 'pt-br' : 'en-US' 
+  changeLanguage(language)
+  // function handleChangeLanguage(){
+  //     const newLanguage = currentLanguage === 'en-US' ? 'pt-br' : 'en-US' 
       
-      changeLanguage(newLanguage)
-      setCurrentLanguage(newLanguage)
+  //     setCurrentLanguage(newLanguage)
 
-  }
+  // }
 
 
   moment.locale(language); // Configura o locale para pt-br
@@ -56,11 +56,11 @@ function App() {
   return (
     <>
 
-      <div className="py-2 px-2">
+      {/* <div className="py-2 px-2">
         <button onClick={handleChangeLanguage} className="fixed bg-blue-500 text-white font-roboto font-medium py-2 px-4 rounded-full shadow-sm hover:shadow-md transition-all duration-300">
             Tradução - {language}
         </button>
-      </div>
+      </div> */}
 
       <Header t={t} language={language}/>
       <Summary t={t} language={language} currency={currency} summary={summary}/>

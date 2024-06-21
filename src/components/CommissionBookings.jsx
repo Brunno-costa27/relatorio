@@ -231,20 +231,20 @@ export function CommissionBookings({ t, language, currency, canal_de_comissoes, 
       <table className="w-full flex flex-col">
         <tbody className="w-full text-xs">
           <tr className="w-full flex text-center" >
-            <td className="print:w-[80%] w-full text-left font-bold border-b-0 border-y border-black px-1 py-2">Total</td>
-            <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="print:w-4/5 w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="print:w-[80%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
-            <td className="print:w-[85%] w-full border-y border-b-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-[80%] w-full text-left font-bold border-t-0 border-y border-black px-1 py-2">Total</td>
+            <td className="print:w-[85%] w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-4/5 w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-[85%] w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-[85%] w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-[80%] w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
+            <td className="print:w-[85%] w-full border-y border-t-0 border-black text-left px-1 py-2"></td>
 
-            <td className="print:w-[80%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2"></td>
-            <td className="print:w-[85%] w-full  text-left font-bold border-b-0 border-y border-black px-1 py-2">{t('commissionBookings.totalCommission.commission', {
+            <td className="print:w-[80%] w-full  text-left font-bold border-t-0 border-y border-black px-1 py-2"></td>
+            <td className="print:w-[85%] w-full  text-left font-bold border-t-0 border-y border-black px-1 py-2">{t('commissionBookings.totalCommission.commission', {
               value:  formatNumberByLanguage(summary[0].comissions.totalComission, currency, language) 
             })}</td>
-            <td className="print:w-[82%] w-full text-left font-bold border-b-0 border-y  border-black px-1 py-2">{t('commissionBookings.totalCommission.owner', {
+            <td className="print:w-[82%] w-full text-left font-bold border-t-0 border-y  border-black px-1 py-2">{t('commissionBookings.totalCommission.owner', {
               value:  formatNumberByLanguage(summary[0].comissions.ownerValue, currency, language) 
             })}</td>
           </tr>
